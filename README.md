@@ -23,14 +23,14 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 3. c01 - Hyperelastic isotropic matrix constant 2
 4. phi - Filament volume fraction
 5. ll - Filament contour length $(\mu \mathrm{m})$
-6. r0f - Filament initial end-to-end distance $\mu\mathrm{m}$
-7. r0c - Crosslinker (CL) initial end-to-end distance 
+6. r0f - Filament initial end-to-end distance $(\mu \mathrm{m})$
+7. r0c - Crosslinker (CL) initial end-to-end distance $(\mu \mathrm{m})$
 8. eta - CL relative stiffness
-9. mu0 - Filament stretch modulus [pN]
+9. mu0 - Filament stretch modulus (pN)
 10. beta - Beta parameter from Holzapfel beta model
-11. b0 - Bending stiffness ($T \cdot L_p \cdot k_b$) [pN * $\mu \mathrm{m}^2$]
+11. b0 - Bending stiffness ($T \cdot L_p \cdot k_b$) (pN * $\mu \mathrm{m}^2$)
 12. lambda0 - Pre-stretch
-13. nn - Isotropic filaments per unit volume [$\mu \mathrm{m}^{-3}$]
+13. nn - Isotropic filaments per unit volume $(\mu \mathrm{m}^{-3})$
 14. bb - Dispersion parameter
 
 ### _initialize_ and _sdvread_
