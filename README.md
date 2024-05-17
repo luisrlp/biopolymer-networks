@@ -98,7 +98,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 ##### _pk2isomatfic_
 - 2nd Piola-Kirchoff fictitious stress tensor.
-1. $\bar{\gamma}_1 = 2(\mathrm{diso}(1)+\bar{I}_1\mathrm{diso}(2)) = \partial$ and $\Psi__{iso}$ 
+1. $\bar{\gamma}_1 = 2(\mathrm{diso}(1)+\bar{I}_1\mathrm{diso}(2)) = \partial$ and $\Psi\_{iso}$ 
 2. $\Psi_{iso}$
 11. $\bar{\gamma}_1=2\left(\frac{\partial \Psi_{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \bar{I}_1}+\bar{I}_1 \frac{\partial \Psi_{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \bar{I}_2}\right) = 2(\mathrm{diso}(1)+\bar{I}_1\mathrm{diso}(2))$
 2. $\bar{\gamma}_2 = -2 \frac{\partial \Psi_{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \bar{I}_2}=-2\mathrm{diso}(2)$
