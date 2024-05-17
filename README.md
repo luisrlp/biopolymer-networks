@@ -86,7 +86,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 1. $\mathcal{G}=\frac{1}{4}\left(J^2-1-2 \ln J\right)$
 2. $\Psi_{\mathrm{vol}}=k \mathcal{G}$
 3. $p^{*}=\frac{\mathrm{d} \Psi_{\text {vol }}(J)}{\mathrm{d} J} = \frac{1}{2}\kappa(J-J^{-1})$
-4. $\tilde{p} = p^{*} + J \frac{\mathrm{d}p^*}{\mathrm{d}J}$
+4. $\tilde{p} = p^\* + J \frac{\mathrm{d}p^\*}{\mathrm{d}J}$
 
 #### 2.2.1. Isotropic soft ground substance (IM)
 - IM contribution is only considered when filament volume fration $\varphi<1$.
