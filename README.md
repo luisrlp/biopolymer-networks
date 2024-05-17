@@ -22,7 +22,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 2. c10 - Hyperelastic isotropic matrix constant 1
 3. c01 - Hyperelastic isotropic matrix constant 2
 4. phi - Filament volume fraction
-5. ll - Filament contour length $\mu$
+5. ll - Filament contour length [$\mu \mathrm{m}$]
 6. r0f - Filament initial end-to-end distance 
 7. r0c - Crosslinker (CL) initial end-to-end distance 
 8. eta - CL relative stiffness
