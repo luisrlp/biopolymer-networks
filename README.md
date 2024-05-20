@@ -125,10 +125,10 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 - Detailed in AFFCLNETFIC_README.md
 
 ##### Adding affine, non-affine and isotropic matrix contributions, for both spatial and material descriptions
-- $\tilde{\boldsymbol{\sigma}}=(1-\phi)\tilde{\boldsymbol{\sigma}}\_{\mathrm{IM}} +\tilde{\boldsymbol{\sigma}}\_{\mathrm{NA}}+\tilde{\boldsymbol{\sigma}}_{\mathrm{AN}}$
-- $\tilde{\mathbb{c}}=(1-\phi)\tilde{\mathbb{c}}\_{\mathrm{IM}} +\tilde{\mathbb{c}}\_{\mathrm{NA}}+\tilde{\mathbb{c}}_{\mathrm{AN}}$
-- $\tilde{\mathbf{S}} = (1-\phi)\tilde{\mathbf{S}}\_{\mathrm{IM}} + \tilde{\mathbf{S}}\_{\mathrm{NA}}+\tilde{\mathbf{S}}_{\mathrm{AN}}$
-- $\tilde{\mathbb{C}} = (1-\phi)\tilde{\mathbb{C}}\_{\mathrm{IM}} + \tilde{\mathbb{C}}\_{\mathrm{NA}}+\tilde{\mathbb{C}}_{\mathrm{AN}}$
+- $\tilde{\boldsymbol{\sigma}}=(1-\varphi)\tilde{\boldsymbol{\sigma}}\_{\mathrm{IM}} +\tilde{\boldsymbol{\sigma}}\_{\mathrm{NA}}+\tilde{\boldsymbol{\sigma}}_{\mathrm{AN}}$
+- $\tilde{\mathbb{c}}=(1-\varphi)\tilde{\mathbb{c}}\_{\mathrm{IM}} +\tilde{\mathbb{c}}\_{\mathrm{NA}}+\tilde{\mathbb{c}}_{\mathrm{AN}}$
+- $\tilde{\mathbf{S}} = (1-\varphi)\tilde{\mathbf{S}}\_{\mathrm{IM}} + \tilde{\mathbf{S}}\_{\mathrm{NA}}+\tilde{\mathbf{S}}_{\mathrm{AN}}$
+- $\tilde{\mathbb{C}} = (1-\varphi)\tilde{\mathbb{C}}\_{\mathrm{IM}} + \tilde{\mathbb{C}}\_{\mathrm{NA}}+\tilde{\mathbb{C}}_{\mathrm{AN}}$
 
 ##### Strain-Energy (not computed)
 
@@ -177,3 +177,108 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 ##### Adding all contributions
 - $\mathbb{c} = \mathbb{c}_{\mathrm{vol}} + \bar{\mathbb{c}} + \mathbb{c}^{\mathrm{jr}}$
+
+-----------------------------------------------------------------------------------------------------------------
+
+## 3. _affclnetfic_discrete_
+
+- Affine network with complaint crosslinkers
+- Provides fictitious cauchy and elasticity tensors
+- Discrete angular integration scheme (icosahedron)
+
+
+### 3.1. Build the icosahedron
+
+#### _icos_size_
+- Sizes the 3D icosahedron
+- Sets the number of points/vertices (12), edges (30), faces (20), points per face (3).
+
+#### _icos_shape_
+- Sets the icosahedron
+1. Initiliaze 4 auxiliary variables for defining the icosahedron:
+    - point_coord: array with the coordinates for each point 
+$
+\begin{bmatrix}
+x_{1} & x_{2} & x_{3} \cdots \\
+y_{1} & y_{2} & y_{3} \cdots\\
+z_{1} & z_{2} & z_{3} \cdots
+\end{bmatrix}
+$
+    - edge_point: indices of the points that make up each edge
+$
+\begin{bmatrix}
+1 & 1 & \cdots \\
+2 & 3 & \cdots
+\end{bmatrix}
+$
+    - face_order: npts in each face 
+$
+\begin{bmatrix}
+3 & 3 & 3 & \cdots
+\end{bmatrix}
+$
+    - face_point: indices of the points that make up each face
+$
+\begin{bmatrix}
+1 & 1 & \cdots \\
+2 & 3 & \cdots \\
+3 & 4 & \cdots 
+\end{bmatrix}
+$
+2. Call _icos_shape_ to fill the 4 variables
+
+### 3.2. Initialize model data
+- Initialize integral data
+
+#### Filament
+- Read filament properties
+
+#### Network
+- Read network properties (including intitial preferred direction prefdir0)
+- $r_0 = r_{0,f} + r_{0,c}$
+
+##### _deffil_
+- Gives the stretch and preferred direction in the deformed configuration
+1. $m = \mathbf{F}m_0$
+2. $\lambda = ||m||$
+
+- Get the unit vector: $\hat{m} = \frac{m}{||m||}$
+
+### 3.3. Angular Integration
+
+- Loop through the faces of the icosahedron. For each face, go through the baricentric coordinates (f1, f2, f3) of all subtriangles. **Note:** Variable _factor_ defines how dense will be the subtriangle "mesh".
+
+#### _sphere01_triangle_project_
+- Calculates the unit sphere projection (x,y,z coordinates) of the center and vertices of the current subtriangle.
+
+#### _sphere01_triangle_vertices_to_area_
+- Calculates the area of the current **spherical** subtriangle, that will be used as a weight for the numerical integration.
+
+#### _deffil_
+- Stretch and preferred direction in the deformed configuration
+
+#### _bangle_
+- Angle between filament ($m_f$) and the preferred direction ($\hat{m}$)
+
+#### _density_
+- Filament density: $\rho = 4\sqrt{\frac{b}{2\pi}}\frac{\exp{2b{\cos{\theta}}^2}}{erfi}$
+
+#### Filament and Crosslinker stretch
+- $\lambda_f = \eta * \frac{r_0}{r_{0,f}}(\lambda-1)+1$
+- $\lambda_c = (\lambda-r_0-\lambda_f*r_{0,f})/r_{0,c}$ (não é usado em lado nenhum???)
+
+#### _fil_
+- Call _pullforce_ to obtain the filament force
+    - Gets the roots of $G(f)=0$. 
+    - $G(f) = LHS-RHS = 0$ comes from the relation for extensible filaments: $\frac{\lambda \lambda_0 r_0}{L} = 1+\frac{f}{\mu_0} + \frac{(1+2f/\mu_0)(1+f/\mu_0)^\beta (1-r_0 / L)}{[1+fL^2/(\pi^2B_0)+f^2L^2/(\pi^2B_0\mu_0)]^\beta}$
+- Filament Strain-Energy 1st and 2nd order derivatives
+- $w' = \lambda_0 r_0 f$
+- $w^{\prime \prime}=\frac{\lambda_{0}^{2} r_{0}^{2} \mu_{0} / L}{1+Y\left(\frac{1+\alpha f^{*}}{1+f^{*}+\alpha f^{*^{2}}}\right)^{\beta}\left(1-r_{0} / L\right)}$, with $Y=\frac{\beta}{\alpha} \frac{\left(1+2 \alpha f^{\star}\right)^{2}}{1+f^{\star}+\alpha f^{2}}-\beta \frac{1+2 \alpha f^{\star}}{1+\alpha f^{\star}}-2$
+
+#### _sigfilfic_
+- Fictitious Cauchy stress tensor 
+- $\tilde{\boldsymbol{\sigma}}_{\mathrm{AN}}=n J^{-1} \int_{\Omega} \rho(\mathbf{m}) \hat{\bar{\lambda}}^{-1} \bar{w}^{\prime}(\widehat{\bar{\lambda}}) \mathbf{m} \otimes \mathbf{m} d \Omega$
+
+#### _csfilfic_
+- Fictitious elasticity tensor (spatial description)
+- $\widetilde{\mathbb{c}}_{\mathrm{AN}}=n J^{-1} \int_{\Omega} \rho(\mathbf{m}) \widehat{\bar{\lambda}}^{-2}\left[\bar{w}^{\prime \prime}(\widehat{\hat{\lambda}})-\widehat{\bar{\lambda}}^{-1} \bar{w}^{\prime}(\hat{\bar{\lambda}})\right] \mathbf{m} \otimes \mathbf{m} \otimes \mathbf{m} \otimes \mathbf{m} \mathrm{~d} \Omega$
