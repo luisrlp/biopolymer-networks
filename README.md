@@ -196,7 +196,8 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 #### _icos_shape_
 - Sets the icosahedron
 1. Initiliaze 4 auxiliary variables for defining the icosahedron:
-    - point_coord: array with the coordinates for each point ```math \begin{bmatrix}X\\Y\end{bmatrix} ```
+    - point_coord: array with the coordinates for each point ```math 
+    \begin{bmatrix}X\\Y\end{bmatrix} ```
 
     - edge_point: indices of the points that make up each edge
 $
