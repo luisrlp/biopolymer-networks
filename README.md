@@ -285,4 +285,4 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 #### _csfilfic_
 - Fictitious elasticity tensor (spatial description)
-- $\widetilde{\mathbb{c}}\_{\mathrm{AN}}=n J^{-1} \int\_{\Omega} \rho(\mathbf{m}) \widehat{\bar{\lambda}}^{-2}\left[\bar{w}^{\prime \prime}(\widehat{\hat{\lambda}})-\widehat{\bar{\lambda}}^{-1} \bar{w}^{\prime}(\hat{\bar{\lambda}})\right] \mathbf{m} \otimes \mathbf{m} \otimes \mathbf{m} \otimes \mathbf{m} \mathrm{~d} \Omega$
+- $\widetilde{\mathbb{c}}\_{\mathrm{AN}}=n J^{-1} \int\_{\Omega} \rho(\mathbf{m}) \widehat{\bar{\lambda}}^{-2}\left[\bar{w}^{\prime \prime}(\widehat{\bar{\lambda}})-\widehat{\bar{\lambda}}^{-1} \bar{w}^{\prime}(\hat{\bar{\lambda}})\right] \mathbf{m} \otimes \mathbf{m} \otimes \mathbf{m} \otimes \mathbf{m} \mathrm{~d} \Omega$
