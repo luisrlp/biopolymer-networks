@@ -104,7 +104,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 ##### _sigisomatfic_
 - Cauchy fictitious stress tensor (push forward of $\tilde{\mathbf{S}}$).
-- $ \tilde{\boldsymbol{\sigma}}=J^{-1} \mathbf{F \tilde{S} F}^{\mathrm{T}} $
+- $ \tilde{\mathbf{\sigma}}=J^{-1} \mathbf{F \tilde{S}} \mathbf{F}^{\mathrm{T}} $
 
 ##### _cmatisomatfic_
 - 4th-order fictitious elasticity tensor in material description $\tilde{\mathbb{C}}$
