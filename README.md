@@ -200,32 +200,34 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
     ```math 
     \begin{bmatrix}
     x_{1} & x_{2} & x_{3} \cdots \\
-    y_{1} & y_{2} & y_{3} \cdots\\
+    y_{1} & y_{2} & y_{3} \cdots \\
     z_{1} & z_{2} & z_{3} \cdots
     \end{bmatrix}
     ```
 
     - edge_point: indices of the points that make up each edge
-'''math
-\begin{bmatrix}
-1 & 1 & \cdots \\
-2 & 3 & \cdots
-\end{bmatrix}
-'''
+    '''math
+    \begin{bmatrix}
+    1 & 1 & \cdots \\
+    2 & 3 & \cdots
+    \end{bmatrix}
+    '''
+
     - face_order: npts in each face 
-'''math
-\begin{bmatrix}
-3 & 3 & 3 & \cdots
-\end{bmatrix}
-'''
+    '''math
+    \begin{bmatrix}
+    3 & 3 & 3 & \cdots
+    \end{bmatrix}
+    '''
+
     - face_point: indices of the points that make up each face
-'''math
-\begin{bmatrix}
-1 & 1 & \cdots \\
-2 & 3 & \cdots \\
-3 & 4 & \cdots 
-\end{bmatrix}
-'''
+    '''math
+    \begin{bmatrix}
+    1 & 1 & \cdots \\
+    2 & 3 & \cdots \\
+    3 & 4 & \cdots 
+    \end{bmatrix}
+    '''
 
 2. Call _icos_shape_ to fill the 4 variables
 
