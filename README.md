@@ -103,8 +103,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 3. $\tilde{\mathbf{S}}=2 \frac{\partial \Psi_{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \overline{\mathbf{C}}}=\bar{\gamma}_1 \mathbf{I}+\bar{\gamma}_2 \overline{\mathbf{C}}$
 
 ##### _sigisomatfic_
-- Cauchy fictitious stress tensor (push forward of $\tilde{\mathbf{S}}$).
-- $\tilde{\mathbf{S}} = $
+- Cauchy fictitious stress tensor (push forward of $\tilde{\mathbf{S}}$)
 - $\tilde{\mathbf{\sigma}} =J^{-1}  \mathbf{F} \tilde{\mathbf{S}} \mathbf{F}^{\mathrm{T}}$
 
 ##### _cmatisomatfic_
@@ -112,7 +111,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 - TO REVIEW (6.169 - Não falta multiplicar por J**-4/3?????)
 
 ##### _csisomatfic_
-- 4th-order fictitious elasticity tensor in spatial description $\tilde{\mathbb{c}}$ (push-forward of $\tilde{\mathbb{C}}$)
+- 4th-order fictitious elasticity tensor in spatial description $\mathbb{\tilde{c}}$ (push-forward of $\tilde{\mathbb{C}}$)
 
 #### 2.2.2. Filaments network (is NA implementation supposed to be here????)
 
