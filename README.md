@@ -12,7 +12,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 - Initializes all variables as zero.
 
 ### _onem_
-- Defines the 2nd and 4th order identity tensors and 4th order symmetric identity tensor: $\mathbf{I}, \mathbb{I} \mathrm{~and~} \mathbb{I}^s$, respectively. 
+- Defines the 2nd and 4th order identity tensors and 4th order symmetric identity tensor: $\mathbf{I}, \mathbb{I}$ and $\mathbb{I}^s$, respectively. 
 - $\mathbf{I}=\delta_{i j}\left(\mathbf{e}_i \otimes \mathbf{e}_j\right)$
 - $\mathbb{I}=\delta_{i k} \delta_{j l}\left(\mathbf{e}_i \otimes \mathbf{e}_j \otimes \mathbf{e}_k \otimes \mathbf{e}_l\right)$
 - $\mathbb{I}^s=\frac{1}{2}\left(\delta_{i k} \delta_{j l}+\delta_{i l} \delta_{j k}\right)\left(\mathbf{e}_i \otimes \mathbf{e}_j \otimes \mathbf{e}_k \otimes \mathbf{e}_l\right)$
