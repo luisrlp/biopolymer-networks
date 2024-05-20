@@ -78,7 +78,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 ### 2.2. CONSTITUTIVE RELATIONS
 
 ### _projeul_ and _projlag_
-1. Projection tensor in Lagrangian (material) description: $\mathbb{P} = \mathbb{I} - (\mathbf{C}^{-1} \otimes \mathbf{C})/3$ (Falta dividir por 3 nos pngs do UMAT-Abaqus???)
+1. Projection tensor in Lagrangian (material) description: $\mathbb{P} = \mathbb{I} - (\mathbf{C}^{-1} \otimes \mathbf{C})/3$
 2. Projection tensor in Eulerian (spatial) description: $\mathbb{p} = \mathbb{I}^s - (\mathbf{I} \otimes \mathbf{I})/3$
 
 ### _vol_
@@ -104,11 +104,10 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 ##### _sigisomatfic_
 - Cauchy fictitious stress tensor (push forward of $\tilde{\mathbf{S}}$)
-- $\tilde{\mathbf{\sigma}} =J^{-1}  \mathbf{F} \tilde{\mathbf{S}} \mathbf{F}^{\mathrm{T}}$
+- $\tilde{\boldsymbol{\sigma}} =J^{-1}  \mathbf{F} \tilde{\mathbf{S}} \mathbf{F}^{\mathrm{T}}$
 
 ##### _cmatisomatfic_
 - 4th-order fictitious elasticity tensor in material description $\tilde{\mathbb{C}}$
-- TO REVIEW (6.169 - Não falta multiplicar por J**-4/3?????)
 
 ##### _csisomatfic_
 - 4th-order fictitious elasticity tensor in spatial description $\mathbb{\tilde{c}}$ (push-forward of $\tilde{\mathbb{C}}$)
@@ -122,7 +121,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 ##### _affclnetfic_discrete_
 - Affine network with compliant crosslinkers. Returns the fictitious Cauchy $\tilde{\boldsymbol{\sigma}}$ and spatial elasticity $\tilde{\mathbb{c}}$ tensors.
-- Detailed in AFFCLNETFIC_README.md
+- Detailed in 3.
 
 ##### Adding affine, non-affine and isotropic matrix contributions, for both spatial and material descriptions
 - $\tilde{\boldsymbol{\sigma}}=(1-\varphi)\tilde{\boldsymbol{\sigma}}\_{\mathrm{IM}} +\tilde{\boldsymbol{\sigma}}\_{\mathrm{NA}}+\tilde{\boldsymbol{\sigma}}_{\mathrm{AN}}$
@@ -138,7 +137,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 ##### _pk2vol_
 - Volumetric part of the second Piola-Kirchoff stress tensor
-- $\mathbf{S}_{\mathrm{vol}} = J p^* \mathbf{C}^{-1}$ (nao falta multiplicar por J????)
+- $\mathbf{S}_{\mathrm{vol}} = J p^* \mathbf{C}^{-1}$
 
 ##### _sigvol_
 - Volumetric part of the Cauchy stress tensor
@@ -269,7 +268,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 #### Filament and Crosslinker stretch
 - $\lambda_f = \eta * \frac{r_0}{r_{0,f}}(\lambda-1)+1$
-- $\lambda_c = (\lambda-r_0-\lambda_f*r_{0,f})/r_{0,c}$ (não é usado em lado nenhum???)
+- $\lambda_c = (\lambda-r_0-\lambda_f*r_{0,f})/r_{0,c}$
 
 #### _fil_
 - Call _pullforce_ to obtain the filament force
