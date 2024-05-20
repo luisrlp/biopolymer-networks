@@ -104,7 +104,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 ##### _sigisomatfic_
 - Cauchy fictitious stress tensor (push forward of $\tilde{\mathbf{S}}$).
-- $ \tilde{\mathbf{\sigma}} = $
+- $ \tilde{\sigma} = $
 - $ \tilde{\mathbf{\sigma}} =J^{-1}  \mathbf{F} \tilde{\mathbf{S}} \mathbf{F}^{\mathrm{T}}$
 
 ##### _cmatisomatfic_
