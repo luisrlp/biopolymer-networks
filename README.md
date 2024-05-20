@@ -197,13 +197,12 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 - Sets the icosahedron
 1. Initiliaze 4 auxiliary variables for defining the icosahedron:
     - point_coord: array with the coordinates for each point 
-$
-\begin{bmatrix}
-x_{1} & x_{2} & x_{3} \cdots \\
-y_{1} & y_{2} & y_{3} \cdots\\
-z_{1} & z_{2} & z_{3} \cdots
-\end{bmatrix}
-$
+$$\begin{bmatrix}
+x_{1} & x_{2} & x_{3} & \cdots \\
+y_{1} & y_{2} & y_{3} & \cdots\\
+z_{1} & z_{2} & z_{3} & \cdots
+\end{bmatrix}$$
+
     - edge_point: indices of the points that make up each edge
 $
 \begin{bmatrix}
