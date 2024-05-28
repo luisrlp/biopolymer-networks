@@ -242,8 +242,8 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 ##### _deffil_
 - Gives the stretch and preferred direction in the deformed configuration
-1. $m = \mathbf{F}m_0$
-2. $\lambda = ||m||$
+1. $\overline{m} = \overline{\mathbf{F}}m_0$
+2. $\overline{\lambda} = ||\overline{m}||$
 
 - Get the unit vector: $\hat{m} = \frac{m}{||m||}$
 
