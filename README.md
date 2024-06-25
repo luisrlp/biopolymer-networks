@@ -78,7 +78,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 ### 2.2. CONSTITUTIVE RELATIONS
 
 ### _projeul_ and _projlag_
-1. Projection tensor in Lagrangian (material) description: $\mathbb{P} = \mathbb{I} - (\mathbf{C}^{-1} \otimes \mathbf{C})/3$ (Falta dividir por 3 nos pngs do UMAT-Abaqus???)
+1. Projection tensor in Lagrangian (material) description: $\mathbb{P} = \mathbb{I} - (\mathbf{C}^{-1} \otimes \mathbf{C})/3$
 2. Projection tensor in Eulerian (spatial) description: $\mathbb{p} = \mathbb{I}^s - (\mathbf{I} \otimes \mathbf{I})/3$
 
 ### _vol_
@@ -86,7 +86,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 1. $\mathcal{G}=\frac{1}{4}\left(J^2-1-2 \ln J\right)$
 2. $\Psi_{\mathrm{vol}}=k \mathcal{G}$
 3. $p^{*}=\frac{\mathrm{d} \Psi_{\text {vol }}(J)}{\mathrm{d} J} = \frac{1}{2}\kappa(J-J^{-1})$
-4. $\tilde{p} = p^{*} + J \frac{\mathrm{d}p^*}{\mathrm{d}J}$
+4. $\tilde{p} = p^* + J \frac{\mathrm{d}p^*}{\mathrm{d}J}$
 
 #### 2.2.1. Isotropic soft ground substance (IM)
 - IM contribution is only considered when filament volume fration $\varphi<1$.
