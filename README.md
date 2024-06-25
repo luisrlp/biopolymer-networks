@@ -99,13 +99,12 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 ##### _pk2isomatfic_
 - 2nd Piola-Kirchoff fictitious stress tensor.
 1. $\bar{\gamma}\_{1} = 2\left(\frac{\partial \Psi_{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \bar{I}_1}+\bar{I}\_1 \frac{\partial \Psi\_{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \bar{I}_2}\right) = 2(\mathrm{diso}(1)+\bar{I}_1\mathrm{d iso}(2))$
-1. $\bar{\gamma}\_{1} = 2 $
 2. $\bar{\gamma}\_2 = -2 \frac{\partial \Psi_{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \bar{I}_2}=-2\mathrm{diso}(2)$
 3. $\tilde{\mathbf{S}}=2 \frac{\partial \Psi_{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \overline{\mathbf{C}}}=\bar{\gamma}_1 \mathbf{I}+\bar{\gamma}_2 \overline{\mathbf{C}}$
 
 ##### _sigisomatfic_
 - Cauchy fictitious stress tensor (push forward of $\tilde{\mathbf{S}}$).
-- $ \tilde{\boldsymbol{\sigma}}=J^{-1} \mathbf{F \tilde{S} F}^{\mathrm{T}} $
+- $\tilde{\boldsymbol{\sigma}}=J^{-1} \mathbf{F \tilde{S} F}^{\mathrm{T}} $
 
 ##### _cmatisomatfic_
 - 4th-order fictitious elasticity tensor in material description $\tilde{\mathbb{C}}$
