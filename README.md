@@ -194,35 +194,10 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 #### _icos_shape_
 - Sets the icosahedron
 1. Initiliaze 4 auxiliary variables for defining the icosahedron:
-    - point_coord: array with the coordinates for each point 
-$
-\begin{bmatrix}
-x_{1} & x_{2} & x_{3} \cdots \\
-y_{1} & y_{2} & y_{3} \cdots\\
-z_{1} & z_{2} & z_{3} \cdots
-\end{bmatrix}
-$
-    - edge_point: indices of the points that make up each edge
-$
-\begin{bmatrix}
-1 & 1 & \cdots \\
-2 & 3 & \cdots
-\end{bmatrix}
-$
-    - face_order: npts in each face 
-$
-\begin{bmatrix}
-3 & 3 & 3 & \cdots
-\end{bmatrix}
-$
-    - face_point: indices of the points that make up each face
-$
-\begin{bmatrix}
-1 & 1 & \cdots \\
-2 & 3 & \cdots \\
-3 & 4 & \cdots 
-\end{bmatrix}
-$
+    - point_coord: array with the coordinates for each point - dim [3, $n_{\mathrm{pts}}$ ]
+    - edge_point: indices of the points that make up each edge - dim [2, $n_{\mathrm{edges}}$ ]
+    - face_order: npts in each face - dim [1, $n_{\mathrm{faces}}$]
+    - face_point: indices of the points that make up each face - dim [3, $n_{\mathrm{faces}}$]
 2. Call _icos_shape_ to fill the 4 variables
 
 ### 3.2. Initialize model data
@@ -279,4 +254,4 @@ $
 
 #### _csfilfic_
 - Fictitious elasticity tensor (spatial description)
-- $\widetilde{\mathbb{c}}\_{\mathrm{AN}}=n J^{-1} \int\_{\Omega} \rho(\mathbf{m}) \widehat{\bar{\lambda}}^{-2}\left[\bar{w}^{\prime \prime}(\widehat{\hat{\lambda}})-\widehat{\bar{\lambda}}^{-1} \bar{w}^{\prime}(\hat{\bar{\lambda}})\right] \mathbf{m} \otimes \mathbf{m} \otimes \mathbf{m} \otimes \mathbf{m} \mathrm{~d} \Omega$
+- $\widetilde{\mathbb{c}}\_{\mathrm{AN}}=n J^{-1} \int\_{\Omega} \rho(\mathbf{m}) \widehat{\bar{\lambda}}^{-2}\left[\bar{w}^{\prime \prime} \widehat{\hat{\lambda}} -\widehat{\bar{\lambda}}^{-1} \bar{w}^{\prime}(\hat{\bar{\lambda}})\right] \mathbf{m} \otimes \mathbf{m} \otimes \mathbf{m} \otimes \mathbf{m} \mathrm{~d} \Omega$
