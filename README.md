@@ -108,12 +108,11 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 ##### _cmatisomatfic_
 - 4th-order fictitious elasticity tensor in material description $\tilde{\mathbb{C}}$
-- TO REVIEW (6.169 - Não falta multiplicar por J**-4/3?????)
 
 ##### _csisomatfic_
 - 4th-order fictitious elasticity tensor in spatial description $\tilde{\mathbb{c}}$ (push-forward of $\tilde{\mathbb{C}}$)
 
-#### 2.2.2. Filaments network (is NA implementation supposed to be here????)
+#### 2.2.2. Filaments network (Non-affine network - not implemented)
 
 ##### _erfi_
 - Computes the imaginary error function.
@@ -125,10 +124,10 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 - Detailed in AFFCLNETFIC_README.md
 
 ##### Adding affine, non-affine and isotropic matrix contributions, for both spatial and material descriptions
-- $\tilde{\boldsymbol{\sigma}}=(1-\phi)\tilde{\boldsymbol{\sigma}}_{\mathrm{IM}} +\tilde{\boldsymbol{\sigma}}_{\mathrm{NA}}+\tilde{\boldsymbol{\sigma}}_{\mathrm{AN}}$
-- $\tilde{\mathbb{c}}=(1-\phi)\tilde{\mathbb{c}}_{\mathrm{IM}} +\tilde{\mathbb{c}}_{\mathrm{NA}}+\tilde{\mathbb{c}}_{\mathrm{AN}}$
-- $\tilde{\mathbf{S}} = (1-\phi)\tilde{\mathbf{S}}_{\mathrm{IM}} + \tilde{\mathbf{S}}_{\mathrm{NA}}+\tilde{\mathbf{S}}_{\mathrm{AN}}$
-- $\tilde{\mathbb{C}} = (1-\phi)\tilde{\mathbb{C}}_{\mathrm{IM}} + \tilde{\mathbb{C}}_{\mathrm{NA}}+\tilde{\mathbb{C}}_{\mathrm{AN}}$
+- $\tilde{\boldsymbol{\sigma}}=(1-\phi)\tilde{\boldsymbol{\sigma}}\_{\mathrm{IM}} +\tilde{\boldsymbol{\sigma}}\_{\mathrm{NA}}+\tilde{\boldsymbol{\sigma}}_{\mathrm{AN}}$
+- $\tilde{\mathbb{c}}=(1-\phi)\tilde{\mathbb{c}}\_{\mathrm{IM}} +\tilde{\mathbb{c}}\_{\mathrm{NA}}+\tilde{\mathbb{c}}_{\mathrm{AN}}$
+- $\tilde{\mathbf{S}} = (1-\phi)\tilde{\mathbf{S}}\_{\mathrm{IM}} + \tilde{\mathbf{S}}\_{\mathrm{NA}}+\tilde{\mathbf{S}}_{\mathrm{AN}}$
+- $\tilde{\mathbb{C}} = (1-\phi)\tilde{\mathbb{C}}\_{\mathrm{IM}} + \tilde{\mathbb{C}}\_{\mathrm{NA}}+\tilde{\mathbb{C}}_{\mathrm{AN}}$
 
 ##### Strain-Energy (not computed)
 
