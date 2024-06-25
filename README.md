@@ -61,10 +61,10 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 - $\bar{I_2} = \frac{1}{2}[(\mathrm{tr}\overline{\mathbf{C}})^2 - \mathrm{tr}(\overline{\mathbf{C}}^2)]$
 
 ### _stretch_
-- Computes (deviatoric) stretch tensors $\overline{\mathbf{U}} \mathrm{~and~} \overline{\mathbf{v}}$. These tensors measure local stretching along their mutually orthogonal eigenvectors. Measure of local shape change.
+- Computes (deviatoric) stretch tensors $\overline{\mathbf{U}}$ and $\overline{\mathbf{v}}$. These tensors measure local stretching along their mutually orthogonal eigenvectors. Measure of local shape change.
 - $\mathbf{U}$: Right (material) stretch tensor. Acts on the reference configuration. Its eigenvalues are the principal stretches. Shares eigenvectors ($\mathbf{\hat{N}}_a$) with $\mathbf{C}$.
 - $\mathbf{v}$: Left (spatial) stretch tensor. Acts on the current configuration. Its eigenvalues are the principal stretches. Shares eigenvectors ($\mathbf{\hat{n}}_a$) with $\mathbf{b}$.
-1. CALL _spectral_: ($\overline{\mathbf{C}}$) -> [$\Omega_a$ (eigenvalues = $\lambda_a^2$), $\mathbf{\hat{N}}_a$ (eigenvectors)]
+1. CALL _spectral_: ($\overline{\mathbf{C}}$) -> [ $\Omega_a$ (eigenvalues = $\lambda_a^2$), $\mathbf{\hat{N}}_a$ (eigenvectors)]
 2. $\bar{\lambda}_a = \sqrt{\Omega_a}$
 3. $\overline{\mathbf{U}}$ in the principal referential: $\overline{\mathbf{U}}_{aa}^{\mathrm{p}} = \bar{\lambda}_a$
 4. $\overline{\mathbf{U}} = \mathbf{\hat{N}} \overline{\mathbf{U}}^{\mathrm{p}} \mathbf{\hat{N}}^{\mathrm{T}}$
