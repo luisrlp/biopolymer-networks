@@ -12,7 +12,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 - Initializes all variables as zero.
 
 ### _onem_
-- Defines the 2nd and 4th order identity tensors and 4th order symmetric identity tensor: $\mathbf{I}, \mathbb{I} \mathrm{~and~} \mathbb{I}^s$, respectively. 
+- Defines the 2nd and 4th order identity tensors and 4th order symmetric identity tensor: $\mathbf{I}$, $\mathbb{I}$ and $\mathbb{I}^s$, respectively. 
 - $\mathbf{I}=\delta_{i j}\left(\mathbf{e}_i \otimes \mathbf{e}_j\right)$
 - $\mathbb{I}=\delta_{i k} \delta_{j l}\left(\mathbf{e}_i \otimes \mathbf{e}_j \otimes \mathbf{e}_k \otimes \mathbf{e}_l\right)$
 - $\mathbb{I}^s=\frac{1}{2}\left(\delta_{i k} \delta_{j l}+\delta_{i l} \delta_{j k}\right)\left(\mathbf{e}_i \otimes \mathbf{e}_j \otimes \mathbf{e}_k \otimes \mathbf{e}_l\right)$
@@ -22,15 +22,15 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 2. c10 - Hyperelastic isotropic matrix constant 1
 3. c01 - Hyperelastic isotropic matrix constant 2
 4. phi - Filament volume fraction
-5. ll - Filament contour length [$\mu \mathrm{m}$]
-6. r0f - Filament initial end-to-end distance [$\mu \mathrm{m}$]
-7. r0c - Crosslinker (CL) initial end-to-end distance [$\mu\mathrm{m}$]
+5. ll - Filament contour length [$\mu$m]
+6. r0f - Filament initial end-to-end distance [$\mu$m]
+7. r0c - Crosslinker (CL) initial end-to-end distance [$\mu$m]
 8. eta - CL relative stiffness
 9. mu0 - Filament stretch modulus [pN]
 10. beta - Beta parameter from Holzapfel beta model
 11. b0 - Bending stiffness ($T \cdot L_p \cdot k_b$) [pN * $\mu \mathrm{m}^2$]
 12. lambda0 - Pre-stretch
-13. nn - Isotropic filaments per unit volume [$\mu \mathrm{m}^{-3}$]
+13. nn - Isotropic filaments per unit volume [$\mu$ m $^{-3}$]
 14. bb - Dispersion parameter
 
 ### _initialize_ and _sdvread_
