@@ -98,7 +98,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 ##### _pk2isomatfic_
 - 2nd Piola-Kirchoff fictitious stress tensor.
-1. $\bar{\gamma}__1=2\left(\frac{\partial \Psi__{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \bar{I}_1}+\bar{I}__1 \frac{\partial \Psi_{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \bar{I}_2}\right) = 2(\mathrm{diso}(1)+\bar{I}_1\mathrm{d iso}(2))$
+1. $\bar{\gamma}_\1=2\left(\frac{\partial \Psi_\{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \bar{I}_1}+\bar{I}_\1 \frac{\partial \Psi_{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \bar{I}_2}\right) = 2(\mathrm{diso}(1)+\bar{I}_1\mathrm{d iso}(2))$
 2. $\bar{\gamma}_2=-2 \frac{\partial \Psi_{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \bar{I}_2}=-2\mathrm{diso}(2)$
 3. $\tilde{\mathbf{S}}=2 \frac{\partial \Psi_{\text {iso }}\left(\bar{I}_1 ; \bar{I}_2\right)}{\partial \overline{\mathbf{C}}}=\bar{\gamma}_1 \mathbf{I}+\bar{\gamma}_2 \overline{\mathbf{C}}$
 
