@@ -275,7 +275,7 @@ $
 
 #### _sigfilfic_
 - Fictitious Cauchy stress tensor 
-- $\tilde{\boldsymbol{\sigma}}_{\mathrm{AN}}=n J^{-1} \int_{\Omega} \rho(\mathbf{m}) \hat{\bar{\lambda}}^{-1} \bar{w}^{\prime}(\widehat{\bar{\lambda}}) \mathbf{m} \otimes \mathbf{m} d \Omega$
+- $\tilde{\boldsymbol{\sigma}}\_{\mathrm{AN}}=n J^{-1} \int_{\Omega} \rho(\mathbf{m}) \hat{\bar{\lambda}}^{-1} \bar{w}^{\prime}(\widehat{\bar{\lambda}}) \mathbf{m} \otimes \mathbf{m} d \Omega$
 
 #### _csfilfic_
 - Fictitious elasticity tensor (spatial description)
