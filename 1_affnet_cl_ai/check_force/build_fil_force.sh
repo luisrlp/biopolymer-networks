@@ -1,0 +1,1 @@
+gfortran -o ffil.o fil_force.f90 _global.f90 fil.f90 pullforce.f90 evalg.f90

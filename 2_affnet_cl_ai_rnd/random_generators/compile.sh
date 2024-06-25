@@ -1,0 +1,1 @@
+gfortran -Wextra  -pedantic -o main *.f90 -o random
