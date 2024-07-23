@@ -18,7 +18,7 @@ Output array has shape (6, n_steps):
 def_mode = 'sh'
 output = np.load('output.npy')
 
-def stress_plot(data, def_mode:str):
+def stress_plot(data, def_mode:str, time):
     keys = [kk for kk in data.keys()]
     x = data[keys[0]]
     for i, k in enumerate(keys[1:]):
@@ -28,10 +28,19 @@ def stress_plot(data, def_mode:str):
         plt.ylabel(k, fontsize=16)
         plt.grid(True, alpha=0.3)
         plt.savefig('plot_' + def_mode + '_' + str(i) + '.pdf', bbox_inches = 'tight')
+    for i, k in enumerate(keys[0:]):
+        plt.figure(i+3)
+        plt.plot(time, data[k])
+        plt.xlabel('t', fontsize=16)
+        plt.ylabel(k, fontsize=16)
+        plt.grid(True, alpha=0.3)
+        plt.savefig('plot_' + def_mode + '_' + str(i+3) + '.pdf', bbox_inches = 'tight')
+    
 
 s22 = output[4,:]
 u2 = output[1,:]
 stretch = u2 + 1
+t = output[-1,:]
 
 if def_mode == 'uni':
     data = {'$\lambda$': stretch,
@@ -51,4 +60,4 @@ else:
                 '$\sigma_{22}$ (Pa)': s22,
                 '$\\tau_{12}$ (Pa)': s12}
 
-stress_plot(data, def_mode)
+stress_plot(data, def_mode, t)

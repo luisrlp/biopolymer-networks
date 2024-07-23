@@ -44,7 +44,7 @@ def extract_results():
 
 # Parameters studied
 study_params = {
-    'ETA': [0.3333, 0.6666]
+    'ETA': [0.3333, 0.6666, 1.0]
 }
 
 aux_list = []

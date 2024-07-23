@@ -49,7 +49,8 @@ program main
   write ( *, '(a,i12)' ) '  SEED1 = ', seed1
   write ( *, '(a,i12)' ) '  SEED2 = ', seed2
   
-  test_num = 10000
+  ! test_num = 10000
+  test_num = 500
   allocate (array(test_num))
   allocate (y(test_num))
 
@@ -83,9 +84,9 @@ program main
 min = 0.0D0
 max = 1.0D0
 !!! Choose distribution function
-! call test_gennor ( min, max, mu,sd, phrase ,test_num, array )
-call test_gennor ( mu,sd, phrase ,test_num, array )
-! call test_ignpoi ( mu, sd, phrase, test_num, array )
+! call test_gennor_range ( min, max, mu,sd, phrase ,test_num, array )
+!call test_gennor ( mu,sd, phrase ,test_num, array )
+call test_ignpoi ( mu, sd, phrase, test_num, array )
 ! call test_genunf ( mu, sd, phrase, test_num, array )
 !
   
@@ -1361,8 +1362,8 @@ subroutine test_gennor (avtr, vartr,phrase , n, array)
 !
 !  Select the parameters at random within a given range.
 !
-! low = -10.0E+00
-! high = 10.0E+00
+  low = -10.0E+00
+  high = 10.0E+00
   mu = genunf ( low, high )
   write ( *, '(a,g14.6)' ) '  New MU =   ', mu
 
@@ -1463,8 +1464,9 @@ subroutine test_ignpoi ( avtr, vartr,phrase , n, array )
 !
 !  Select the parameters at random within a given range.
 !
-  low = 0.5E+00
-  high = 20.0E+00
+  ! low = 0.5E+00
+  low = 40.0E+00
+  high = 45.0E+00
   mu = genunf ( low, high )
 
   write ( *, '(a)' ) ' '

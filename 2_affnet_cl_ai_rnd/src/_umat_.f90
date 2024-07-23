@@ -54,7 +54,7 @@ DOUBLE PRECISION, INTENT(IN OUT)         :: dstran(ntens)
 DOUBLE PRECISION, INTENT(IN OUT)         :: time(2)
 DOUBLE PRECISION, INTENT(IN OUT)         :: predef(1)
 DOUBLE PRECISION, INTENT(IN OUT)         :: dpred(1)
-DOUBLE PRECISION, INTENT(IN)             :: props(nprops)
+DOUBLE PRECISION, INTENT(IN OUT)         :: props(nprops) !!! Added OUT
 DOUBLE PRECISION, INTENT(IN OUT)         :: coords(3)
 DOUBLE PRECISION, INTENT(IN OUT)         :: drot(3,3)
 DOUBLE PRECISION, INTENT(IN OUT)         :: dfgrd0(3,3)
@@ -105,6 +105,14 @@ DOUBLE PRECISION :: cjr(ndi,ndi,ndi,ndi)
 DOUBLE PRECISION :: sigma(ndi,ndi),ddsigdde(ndi,ndi,ndi,ndi),  &
     ddpkdde(ndi,ndi,ndi,ndi)
 DOUBLE PRECISION :: stest(ndi,ndi), ctest(ndi,ndi,ndi,ndi)
+
+! DECLARATIONS FOR RANDOM GENERATION
+INTEGER (kind=4) :: seed1, seed2
+INTEGER (kind=4) :: test, test_num
+CHARACTER(len=100) :: phrase
+REAL(kind=4) , allocatable :: y(:), array(:)
+REAL(kind=4) :: l_bound, h_bound
+REAL(kind=4) :: mean, sd
 !----------------------------------------------------------------------
 !-------------------------- INITIALIZATIONS ---------------------------
 !----------------------------------------------------------------------
@@ -174,6 +182,22 @@ ddsigdde=zero
 !------------------------ IDENTITY TENSORS ----------------------------
 !----------------------------------------------------------------------
 CALL onem(unit2,unit4,unit4s,ndi)
+!----------------------------------------------------------------------
+!------------------------ RANDOM GENERATION ---------------------------
+!----------------------------------------------------------------------
+!test_num = 50
+!l_bound = 0.9
+!h_bound = 0.91
+!allocate (array(test_num))
+!allocate (y(test_num))
+!CALL timestamp(phrase)
+!CALL phrtsd(phrase, seed1, seed2)
+!CALL test_gennor(mean, sd, phrase, test_num, array)
+!DO test=1, test_num 
+!  y(test) = l_bound + (array(test) - minval(array))/(maxval(array) - minval(array)) * (h_bound-l_bound)
+!END DO
+!props(8) = y(1)
+!write (*,*) props(8)
 !----------------------------------------------------------------------
 !------------------- MATERIAL CONSTANTS AND DATA ----------------------
 !----------------------------------------------------------------------

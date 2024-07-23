@@ -220,6 +220,8 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 ### 3.3. Angular Integration
 
 - Loop through the faces of the icosahedron. For each face, go through the baricentric coordinates (f1, f2, f3) of all subtriangles. **Note:** Variable _factor_ defines how dense will be the subtriangle "mesh".
+- The total number of nodes/directions is:
+- $n_{\mathrm{nodes}} = n_{\mathrm{faces}} * ( factor + 2*\sum_{i=1}^{factor-1} i)  $
 
 #### _sphere01_triangle_project_
 - Calculates the unit sphere projection (x,y,z coordinates) of the center and vertices of the current subtriangle.

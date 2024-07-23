@@ -45,12 +45,20 @@ s_principal = session.xyDataObjects['S:Max Principal (Avg: 75%) PI: PART-1-1 N: 
 s11 = session.xyDataObjects['S:S11 (Avg: 75%) PI: PART-1-1 N: 1']
 s22 = session.xyDataObjects['S:S22 (Avg: 75%) PI: PART-1-1 N: 1']
 s12 = session.xyDataObjects['S:S12 (Avg: 75%) PI: PART-1-1 N: 1']
+t = []
+for frame in odb.steps['static'].frames:  # Use 'static' as the step name
+    t.append(frame.frameValue)
 
-data_list = [u2, s_principal, s11, s22, s12]
+
+
+data_list = [u2, s_principal, s11, s22, s12, t]
 output_array = np.array([pt[1] for pt in u1.data])
 
 for i, dt in enumerate(data_list):
-    aux_array = np.array([pt[1] for pt in dt.data])
+    if i == len(data_list)-1:
+        aux_array = np.array(t)
+    else:
+        aux_array = np.array([pt[1] for pt in dt.data])
     output_array = np.vstack((output_array, aux_array))
     
 np.save('output.npy', output_array)

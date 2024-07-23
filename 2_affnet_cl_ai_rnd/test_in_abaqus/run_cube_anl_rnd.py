@@ -44,7 +44,7 @@ def extract_results():
 
 # Parameters studied
 study_params = {
-    'ETA': [0.3333, 0.6666]
+    'ETA': [0.3333]
 }
 
 aux_list = []
@@ -57,7 +57,7 @@ for c, config in enumerate(cross_props):
     for k, key in enumerate(study_params):
         mat_props[key] = config[k]
     create_material_file(f'material_param.inp', mat_props)
-    delete_old_files('cube_anl')
+    delete_old_files('cube_anl_rnd')
     run_abaqus_sim()
     extract_results()
     output = np.load('output.npy')

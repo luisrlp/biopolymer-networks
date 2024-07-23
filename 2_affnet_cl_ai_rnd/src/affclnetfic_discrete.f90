@@ -92,7 +92,7 @@ DOUBLE PRECISION :: pd(3),lambda_pref,prefdir0(3),ang_pref
 l       = filprops(1)
 r0f     = filprops(2)
 r0c     = filprops(3)
-etac    = filprops(4)
+etac    = filprops(4) !!!!!!! Input, sendo a média +- sd
 mu0     = filprops(5)
 beta    = filprops(6)
 b0      = filprops(7)
@@ -122,6 +122,8 @@ bdisp   = affprops(2)
   pd=pd/dsqrt(dot_product(pd,pd))
 
 !  Pick a face of the icosahedron, and identify its vertices as A, B, C.
+!  Total number of directions/nodes:
+!  factor * [sum(1,factor,step=1) + sum(1,factor-1,step=1)]
 !
   do face = 1, face_num
 !
@@ -176,7 +178,6 @@ bdisp   = affprops(2)
         ! write(*,*) node_num, lambdaif, rho
         
         IF(lambdaif > 1.0d0)THEN
-
           CALL fil(fi,ffi,dwi,ddwi,lambdaif,lambda0,l,r0f,mu0,beta,b0)
           ! CALL fil(fi,ffi,dwi,ddwi,lambdaif,lambda0,l,r0,mu0,beta,b0)
           
@@ -272,6 +273,7 @@ bdisp   = affprops(2)
         node_num = node_num + 1  
         !rr = rr + ai * v
         !area_total = area_total + ai
+        write(*,*) node_num
 
       end do
     end do
