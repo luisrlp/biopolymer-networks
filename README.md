@@ -83,10 +83,11 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 ### _vol_
 - Volumetric contribution of the strain energy function
-1. $\mathcal{G}=\frac{1}{4}\left(J^2-1-2 \ln J\right)$
+- Ogden model for rubber-like materials 
+1. $\mathcal{G}=\frac{1}{4}\left(J^2-1-2 \ln J\right)$ - Penalty function [Holzapfel 2000, eq. 6.137-6.138]
 2. $\Psi_{\mathrm{vol}}=k \mathcal{G}$
-3. $p^{*}=\frac{\mathrm{d} \Psi_{\text {vol }}(J)}{\mathrm{d} J} = \frac{1}{2}\kappa(J-J^{-1})$
-4. $\tilde{p} = p^* + J \frac{\mathrm{d}p^*}{\mathrm{d}J}$
+3. $p^{*}=\frac{\mathrm{d} \Psi_{\text {vol }}(J)}{\mathrm{d} J} = \frac{1}{2}\kappa(J-J^{-1})$ - Hydrostatic pressure [Holzapfel 2000, eq. 6.91]
+4. $\tilde{p} = p^* + J \frac{\mathrm{d}p^*}{\mathrm{d}J}$ - Aux scalar function [Holzapfel 2000, eq. 6.167]
 
 #### 2.2.1. Isotropic soft ground substance (IM)
 - IM contribution is only considered when filament volume fration $\varphi<1$.
@@ -221,7 +222,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 
 - Loop through the faces of the icosahedron. For each face, go through the baricentric coordinates (f1, f2, f3) of all subtriangles. **Note:** Variable _factor_ defines how dense will be the subtriangle "mesh".
 - The total number of nodes/directions is:
-- $n_{\mathrm{nodes}} = n_{\mathrm{faces}} * ( factor + 2*\sum_{i=1}^{factor-1} i)  $
+- $n_{\mathrm{nodes}} = n_{\mathrm{faces}} * ( factor + 2 * \sum_{i=1}^{factor-1} i)  $
 
 #### _sphere01_triangle_project_
 - Calculates the unit sphere projection (x,y,z coordinates) of the center and vertices of the current subtriangle.
