@@ -186,8 +186,8 @@ CALL onem(unit2,unit4,unit4s,ndi)
 !------------------------ RANDOM GENERATION ---------------------------
 !----------------------------------------------------------------------
 !test_num = 50
-!l_bound = 0.9
-!h_bound = 0.91
+!l_bound = 0.2
+!h_bound = 0.8
 !allocate (array(test_num))
 !allocate (y(test_num))
 !CALL timestamp(phrase)

@@ -15,10 +15,10 @@ Set-4, XSYMM
 ** Name: BC-3 Type: Symmetry/Antisymmetry/Encastre
 *Boundary
 Set-1, YSYMM
-**Boundary
-*Boundary, type=displacement
-Set-2, 2,2, 0.25
-**Boundary, type=displacement,amplitude=amp
+*Boundary
+Set-2, 2,2, 0.000001
+**Boundary, type=displacement
+**Boundary, type=displacement, amplitude=amp
 **Set-2, 2,2, 0.15
 **
 ** ----------------------------------------------------------------

@@ -32,12 +32,21 @@ DOUBLE PRECISION :: vara,avga,maxa,aux0,ffic,suma,rho0,dirmax(ndi)
 DOUBLE PRECISION :: prefdir(nelem,4)
 DOUBLE PRECISION :: pd(3),lambda_pref,prefdir0(3),ang_pref
 
+! RANDOM GENERATORS
+INTEGER :: i_f, sum_f, test_num
+INTEGER (kind=4) :: seed1, seed2
+INTEGER (kind=4) :: test
+CHARACTER(len=100) :: phrase
+REAL(kind=4) , allocatable ::  y(:), rnd_array(:)
+REAL(kind=4) :: l_bound, h_bound
+REAL(kind=4) :: mean, sd
+
 ! INTEGRATION SCHEME
   integer ( kind = 4 ) node_num
   integer ( kind = 4 ) a
   real ( kind = 8 ) a_xyz(3)
   real ( kind = 8 ) a2_xyz(3)
-  real ( kind = 8 ) ai !area o triangle i
+  real ( kind = 8 ) ai !area of triangle i
   real ( kind = 8 ) area_total
   integer ( kind = 4 ) b
   real ( kind = 8 ) b_xyz(3)
@@ -86,13 +95,36 @@ DOUBLE PRECISION :: pd(3),lambda_pref,prefdir0(3),ang_pref
   area_total = 0.0D+00
   node_num = 0
   
+!----------------------------------------------------------------------
+!------------------------ RANDOM GENERATION ---------------------------
+!----------------------------------------------------------------------
+! A random value of a given property is generated for each direction/node (test_num = n_nodes )
+sum_f = 0
+do i_f = 1, factor-1
+  sum_f = sum_f + i_f
+end do
+test_num = face_num * (FACTOR + 2*sum_f)
+
+allocate (rnd_array(test_num))
+allocate (y(test_num))
+
+l_bound = 0.5
+h_bound = 0.500001
+CALL timestamp(phrase)
+CALL phrtsd(phrase, seed1, seed2)
+CALL test_gennor(mean, sd, phrase, test_num, rnd_array)
+
+DO test=1, test_num 
+  y(test) = l_bound + (rnd_array(test) - minval(rnd_array))/(maxval(rnd_array) - minval(rnd_array)) * (h_bound-l_bound)
+END DO
+!----------------------------------------------------------------------
 
 !! initialize the model data
   !     FILAMENT
 l       = filprops(1)
 r0f     = filprops(2)
 r0c     = filprops(3)
-etac    = filprops(4) !!!!!!! Input, sendo a média +- sd
+etac    = filprops(4) !!!!!!! Input, sendo a media +- sd
 mu0     = filprops(5)
 beta    = filprops(6)
 b0      = filprops(7)
@@ -167,8 +199,9 @@ bdisp   = affprops(2)
         rho = one
 
         !!! Always duplicate the changes to the opposite direction subtriangles
+        !!!! Assigning random value to etac
+        etac = y(node_num + 1)  
         IF((etac > zero).AND.(etac .LE. one))THEN
-        ! IF((etac > zero).AND.(etac < one))THEN
             lambdaif=etac*(r0/r0f)*(lambdai-one)+one
             lambdaic=(lambdai*r0-lambdaif*r0f)/r0c
         ELSE
@@ -202,6 +235,7 @@ bdisp   = affprops(2)
         node_num = node_num + 1
         !rr = rr + ai * v
         !area_total = area_total + ai
+        write(*,*) etac
 
       end do
     end do
@@ -236,9 +270,10 @@ bdisp   = affprops(2)
   
         CALL density(rho,ang,bdisp,efi)
         rho=one
-        
+
+        !!!! Assigning random value to etac
+        etac = y(node_num + 1)  
         IF((etac > zero).AND.(etac .LE. one))THEN
-        ! IF((etac > zero).AND.(etac < one))THEN
             lambdaif=etac*(r0/r0f)*(lambdai-one)+one
             lambdaic=(lambdai*r0-lambdaif*r0f)/r0c
         ELSE
@@ -273,7 +308,7 @@ bdisp   = affprops(2)
         node_num = node_num + 1  
         !rr = rr + ai * v
         !area_total = area_total + ai
-        write(*,*) node_num
+        write(*,*) etac
 
       end do
     end do

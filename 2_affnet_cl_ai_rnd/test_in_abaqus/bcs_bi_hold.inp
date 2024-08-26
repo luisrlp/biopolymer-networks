@@ -1,0 +1,22 @@
+** ----------------------------------------------------------------
+**                   CONSTANT STRETCH 
+** ----------------------------------------------------------------
+**Amplitude,name=amp
+**0., 0., 0.3, 0.3, 0.6, 0.6, 1., 1.
+
+
+*** BOUNDARY CONDITIONS
+** Type: Displacement/Rotation
+*Boundary
+Set-1, YSYMM
+** Name: BC-1 Type: Symmetry/Antisymmetry/Encastre
+*Boundary
+Set-3, ZSYMM
+** Name: BC-2 Type: Symmetry/Antisymmetry/Encastre
+*Boundary
+Set-4, XSYMM
+*Boundary
+Set-2, 2,2, 0.2
+**Set-2, 2,2, 0.6
+*Boundary
+Set-7, 1,1, 0.2

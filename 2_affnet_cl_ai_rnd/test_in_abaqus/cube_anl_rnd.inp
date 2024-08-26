@@ -109,4 +109,25 @@ SDV
 *OUTPUT,HISTORY,VARIABLE=PRESELECT,FREQ=1
 *End Step
 ** ----------------------------------------------------------------
+** -----------------------
+** STEP 2: STATIC, CONSTANT SHEAR/STRETCH
+** -----------------------
+*Step, name=static_2, nlgeom=Yes, inc=200
+*Static
+0.01, 1., 1e-06, 0.1
+
+** BOUNDARY CONDITIONS
+** Uniaxial
+**INCLUDE, file=bcs_uni_hold.inp
+** Biaxial
+**INCLUDE, file=bcs_bi_hold.inp
+** Shear
+*INCLUDE, file=bcs_sh_hold.inp
+
+** OUTPUT
+*OUTPUT,FIELD,VARIABLE=PRESELECT,FREQ=1
+*ELEMENT OUTPUT, elset=main_element
+SDV
+*OUTPUT,HISTORY,VARIABLE=PRESELECT,FREQ=1
+*End Step
 ** ----------------------------------------------------------------

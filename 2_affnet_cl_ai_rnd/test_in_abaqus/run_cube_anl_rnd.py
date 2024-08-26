@@ -10,10 +10,11 @@ from itertools import product
 
 # Base Material Properties
 base_mat_props = {'density':5.0e-4,
-                  'K': 1000000000.0,
+                  # 'K': 1000000000.0,
+                  'K': 1000.0,
                   'C10': 0.0, 'C01': 0.0, 'PHI': 1.0,
                   'L': 1.96, 'R0F': 1.63, 'R0C': 0.014, 
-                  'ETA': 0.6666, 'MU0': 10.0e8, 'BETA': 0.5, 'B0': 294.0*16.0*1.38065e-5, 'LAMBDA0': 1.0,
+                  'ETA': 0.6666, 'MU0': 1.0e9, 'BETA': 0.5, 'B0': 294.0*16.0*1.38065e-5, 'LAMBDA0': 1.0,
                   'NA': 7.66, 'BDISP': 0.001}
 
 def delete_old_files(job_name):
