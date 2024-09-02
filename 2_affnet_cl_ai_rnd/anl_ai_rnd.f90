@@ -118,9 +118,9 @@ kstep = 1
 nsteps = 100
 stretch_initial = 0.d0
 stretch = stretch_initial
-stretch_max = 0.15d0
+stretch_max = 0.25d0
 dstretch = (stretch_max-stretch_initial)/(nsteps-1)
-dstretch = 0
+!dstretch = 0
 !!!
 ! PROPS(5)= 1.9 + (ii-1) * 0.1
 write(stri, '(I1)') ii
@@ -155,6 +155,9 @@ ENDDO
  write(*,*) STRESS
  write(*,*)
  write(*,*) DDSDDE
+ write(*,*)
+ write(*,*) NSTATEV, STATEV
+
 close(150)
 !################################################################################################!
 !
