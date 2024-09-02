@@ -110,7 +110,8 @@ DOUBLE PRECISION :: stest(ndi,ndi), ctest(ndi,ndi,ndi,ndi)
 INTEGER (kind=4) :: seed1, seed2
 INTEGER (kind=4) :: test, test_num
 CHARACTER(len=100) :: phrase
-REAL(kind=4) , allocatable :: y(:), array(:)
+!REAL(kind=4) , allocatable :: etac_array(:), array(:)
+DOUBLE PRECISION :: etac_sdv(nsdv-1)
 REAL(kind=4) :: l_bound, h_bound
 REAL(kind=4) :: mean, sd
 !----------------------------------------------------------------------
@@ -283,9 +284,9 @@ CALL erfi(efi,bb)
 !------------ AFFINE NETWORK --------------
 IF (nn > zero) THEN
   ! CALL affclnetfic_discrete(snetficaf,cnetficaf,distgr,filprops,  &
-  !     affprops,efi,noel,det,factor,prefdir,ndi) ! (original)
+  !     affprops,efi,noel,det,prefdir,ndi)
   CALL affclnetfic_discrete(snetficaf,cnetficaf,distgr,filprops,  &
-      affprops,efi,noel,det,prefdir,ndi)
+      affprops,efi,noel,det,prefdir,ndi,etac_sdv)
 END IF
 !      PKNETFIC=PKNETFICNAF+PKNETFICAF
 snetfic=snetficnaf+snetficaf
@@ -379,7 +380,8 @@ CALL indexx(stress,ddsdde,sigma,ddsigdde,ntens,ndi)
 !----------------------------------------------------------------------
 !     DO K1 = 1, NTENS
 !      STATEV(1:27) = VISCOUS TENSORS
-CALL sdvwrite(det,statev)
+!CALL sdvwrite(det,statev)
+CALL sdvwrite(det,etac_sdv,statev)
 !     END DO
 !----------------------------------------------------------------------
 RETURN

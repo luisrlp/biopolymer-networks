@@ -35,6 +35,9 @@ def create_material_file(output_file, parameters):
             value = parameters[key]
             file.write(f"{key} = {value}\n")
 
+def create_section_file():
+    subprocess.run(["python3", "getsec_inp.py"])
+
 def run_abaqus_sim():
     # Run a simulation in Abaqus
     subprocess.run(['abaqus', 'job=cube_anl_rnd.inp', 'user=umat_anl_ai_rnd.f', '-interactive'], check=True)
@@ -57,7 +60,8 @@ mat_props = base_mat_props.copy()
 for c, config in enumerate(cross_props):
     for k, key in enumerate(study_params):
         mat_props[key] = config[k]
-    create_material_file(f'material_param.inp', mat_props)
+    create_material_file('material_param.inp', mat_props)
+    create_section_file()
     delete_old_files('cube_anl_rnd')
     run_abaqus_sim()
     extract_results()
