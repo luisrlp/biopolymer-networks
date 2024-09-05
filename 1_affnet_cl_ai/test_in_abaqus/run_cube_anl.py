@@ -6,9 +6,9 @@ from itertools import product
 
 '''SCRIPT FOR PARAMETRIC STUDIES'''
 # Runs a simulation in Abaqus for each property configuration
-# 
 
 # Base Material Properties
+# Lower K value if there are problems with uniaxial simulations
 base_mat_props = {'density':5.0e-4,
                   'K': 1000000000.0,
                   'C10': 0.0, 'C01': 0.0, 'PHI': 1.0,
@@ -45,6 +45,7 @@ def extract_results():
 # Parameters studied
 study_params = {
     'ETA': [0.3333, 0.6666, 1.0]
+    # 'ETA': [0.3333]
 }
 
 aux_list = []

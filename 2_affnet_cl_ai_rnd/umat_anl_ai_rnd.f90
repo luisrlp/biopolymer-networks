@@ -3,9 +3,16 @@ module global
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Set the control parameters to run the material-related routines
+! FACTOR | NUM DIRECTIONS
+!   3    |      180
+!   4    |      320
+!   5    |      500
+!   6    |      720
+!   7    |      980
 INTEGER NELEM, NSDV, NTERM, FACTOR ! added NTERM and FACTOR
 PARAMETER (NELEM=1)
-PARAMETER (NSDV=1)
+!PARAMETER (NSDV=1)
+PARAMETER (NSDV=11)
 PARAMETER (NTERM=60) ! 60
 PARAMETER (FACTOR=6)
 DOUBLE PRECISION  ONE, TWO, THREE, FOUR, SIX, ZERO
@@ -6150,18 +6157,24 @@ END DO
 
 RETURN
 END SUBROUTINE metiso
-SUBROUTINE sdvwrite(det,statev)
+SUBROUTINE sdvwrite(det,etac_sdv,statev)
 !>    VISCOUS DISSIPATION: WRITE STATE VARS
 use global
 implicit none
 
-INTEGER :: pos1
+INTEGER :: pos1, i
 !
 DOUBLE PRECISION, INTENT(IN)             :: det
+DOUBLE PRECISION, INTENT(IN)             :: etac_sdv(nsdv-1)
 DOUBLE PRECISION, INTENT(OUT)            :: statev(nsdv)
 !
 pos1=0
 statev(pos1+1)=det
+IF (nsdv .GE. 2) THEN
+    DO i = pos1+2, nsdv
+        statev(i)=etac_sdv(i-1)
+    END DO
+END IF
 
 RETURN
 
@@ -6514,7 +6527,8 @@ DOUBLE PRECISION :: stest(ndi,ndi), ctest(ndi,ndi,ndi,ndi)
 INTEGER (kind=4) :: seed1, seed2
 INTEGER (kind=4) :: test, test_num
 CHARACTER(len=100) :: phrase
-REAL(kind=4) , allocatable :: y(:), array(:)
+!REAL(kind=4) , allocatable :: etac_array(:), array(:)
+DOUBLE PRECISION :: etac_sdv(nsdv-1)
 REAL(kind=4) :: l_bound, h_bound
 REAL(kind=4) :: mean, sd
 !----------------------------------------------------------------------
@@ -6687,9 +6701,9 @@ CALL erfi(efi,bb)
 !------------ AFFINE NETWORK --------------
 IF (nn > zero) THEN
   ! CALL affclnetfic_discrete(snetficaf,cnetficaf,distgr,filprops,  &
-  !     affprops,efi,noel,det,factor,prefdir,ndi) ! (original)
+  !     affprops,efi,noel,det,prefdir,ndi)
   CALL affclnetfic_discrete(snetficaf,cnetficaf,distgr,filprops,  &
-      affprops,efi,noel,det,prefdir,ndi)
+      affprops,efi,noel,det,prefdir,ndi,etac_sdv)
 END IF
 !      PKNETFIC=PKNETFICNAF+PKNETFICAF
 snetfic=snetficnaf+snetficaf
@@ -6783,7 +6797,8 @@ CALL indexx(stress,ddsdde,sigma,ddsigdde,ntens,ndi)
 !----------------------------------------------------------------------
 !     DO K1 = 1, NTENS
 !      STATEV(1:27) = VISCOUS TENSORS
-CALL sdvwrite(det,statev)
+!CALL sdvwrite(det,statev)
+CALL sdvwrite(det,etac_sdv,statev)
 !     END DO
 !----------------------------------------------------------------------
 RETURN
@@ -6867,15 +6882,19 @@ use global
 IMPLICIT NONE
 
 !      DOUBLE PRECISION TIME(2),KSTEP
-INTEGER :: pos1
+INTEGER :: pos1, i
 DOUBLE PRECISION, INTENT(OUT)            :: statev(nsdv)
 
 
 pos1=0
 !       DETERMINANT
 statev(pos1+1)=one
+!       CL RELATIVE STIFFNESS
+DO i = pos1+2, nsdv
+    statev(i)=zero
+END DO
 !        CONTRACTION VARIANCE
-statev(pos1+2)=zero
+!statev(pos1+2)=zero
 
 RETURN
 
@@ -8935,10 +8954,10 @@ END DO
 RETURN
 END SUBROUTINE contraction44
 ! SUBROUTINE affclnetfic_discrete(sfic,cfic,f,filprops,affprops,  &
-!         efi,noel,det,factor,prefdir,ndi) ! (original)
+!           efi,noel,det,prefdir,ndi) ! (original)
 
 SUBROUTINE affclnetfic_discrete(sfic,cfic,f,filprops,affprops,  &
-  efi,noel,det,prefdir,ndi)  
+  efi,noel,det,prefdir,ndi,etac_sdv)  
 
 
 
@@ -8956,6 +8975,7 @@ DOUBLE PRECISION, INTENT(IN)             :: affprops(2)
 DOUBLE PRECISION, INTENT(IN OUT)         :: efi
 INTEGER, INTENT(IN OUT)                  :: noel
 DOUBLE PRECISION, INTENT(IN OUT)         :: det
+!DOUBLE PRECISION, INTENT(OUT)            :: etac
 
 INTEGER :: i1,j1,k1,l1,m1, im1
 DOUBLE PRECISION :: sfilfic(ndi,ndi), cfilfic(ndi,ndi,ndi,ndi)
@@ -8966,16 +8986,18 @@ DOUBLE PRECISION :: r0c,etac,lambdaif
 DOUBLE PRECISION :: bdisp,fric,ffmax,ang, frac(4),ru
 DOUBLE PRECISION :: vara,avga,maxa,aux0,ffic,suma,rho0,dirmax(ndi)
 DOUBLE PRECISION :: prefdir(nelem,4)
-DOUBLE PRECISION :: pd(3),lambda_pref,prefdir0(3),ang_pref
+DOUBLE PRECISION :: pd(3),lambda_pref,prefdir0(3),ang_pref 
 
 ! RANDOM GENERATORS
 INTEGER :: i_f, sum_f, test_num
 INTEGER (kind=4) :: seed1, seed2
 INTEGER (kind=4) :: test
 CHARACTER(len=100) :: phrase
-REAL(kind=4) , allocatable ::  y(:), rnd_array(:)
+REAL(kind=4) , allocatable :: rnd_array(:)
 REAL(kind=4) :: l_bound, h_bound
 REAL(kind=4) :: mean, sd
+REAL(kind=4) , allocatable ::  etac_array(:)
+DOUBLE PRECISION, intent(out) :: etac_sdv(nsdv-1)
 
 ! INTEGRATION SCHEME
   integer ( kind = 4 ) node_num
@@ -9042,16 +9064,19 @@ end do
 test_num = face_num * (FACTOR + 2*sum_f)
 
 allocate (rnd_array(test_num))
-allocate (y(test_num))
+allocate (etac_array(test_num))
 
 l_bound = 0.5
-h_bound = 0.500001
+h_bound = 0.502
 CALL timestamp(phrase)
 CALL phrtsd(phrase, seed1, seed2)
 CALL test_gennor(mean, sd, phrase, test_num, rnd_array)
 
 DO test=1, test_num 
-  y(test) = l_bound + (rnd_array(test) - minval(rnd_array))/(maxval(rnd_array) - minval(rnd_array)) * (h_bound-l_bound)
+  etac_array(test) = l_bound + (rnd_array(test) - minval(rnd_array))/(maxval(rnd_array) - minval(rnd_array)) * (h_bound-l_bound)
+  IF (test .LE. nsdv-1) THEN
+    etac_sdv(test) = etac_array(test)
+  END IF
 END DO
 !----------------------------------------------------------------------
 
@@ -9136,7 +9161,7 @@ bdisp   = affprops(2)
 
         !!! Always duplicate the changes to the opposite direction subtriangles
         !!!! Assigning random value to etac
-        etac = y(node_num + 1)  
+        etac = etac_array(node_num + 1)  
         IF((etac > zero).AND.(etac .LE. one))THEN
             lambdaif=etac*(r0/r0f)*(lambdai-one)+one
             lambdaic=(lambdai*r0-lambdaif*r0f)/r0c
@@ -9208,7 +9233,7 @@ bdisp   = affprops(2)
         rho=one
 
         !!!! Assigning random value to etac
-        etac = y(node_num + 1)  
+        etac = etac_array(node_num + 1)  
         IF((etac > zero).AND.(etac .LE. one))THEN
             lambdaif=etac*(r0/r0f)*(lambdai-one)+one
             lambdaic=(lambdai*r0-lambdaif*r0f)/r0c

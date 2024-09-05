@@ -4242,6 +4242,8 @@ subroutine init_generator ( t )
 end
 subroutine initialize ( )
 
+! CAREFUL: THERE IS ALREADY A SUBROUTINE CALLED "INITIALIZE" IN THE UMAT SOURCE FILES
+
 !*****************************************************************************80
 !
 !! INITIALIZE initializes the random number generator library.

@@ -3,9 +3,16 @@ module global
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Set the control parameters to run the material-related routines
+! FACTOR | NUM DIRECTIONS
+!   3    |      180
+!   4    |      320
+!   5    |      500
+!   6    |      720
+!   7    |      980
 INTEGER NELEM, NSDV, NTERM, FACTOR ! added NTERM and FACTOR
 PARAMETER (NELEM=1)
-PARAMETER (NSDV=1)
+!PARAMETER (NSDV=1)
+PARAMETER (NSDV=11)
 PARAMETER (NTERM=60) ! 60
 PARAMETER (FACTOR=6)
 DOUBLE PRECISION  ONE, TWO, THREE, FOUR, SIX, ZERO
