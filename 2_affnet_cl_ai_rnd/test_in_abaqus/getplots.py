@@ -15,7 +15,7 @@ Output array has shape (6, n_steps):
  [sigma_12]]
 '''
 # Set the deformation mode so that only relevant info is plotted ('uni'axial, 'bi'axial, 'sh'ear)
-def_mode = 'uni'
+def_mode = 'sh'
 output = np.load('output.npy')
 
 def stress_plot(data, def_mode:str, time):

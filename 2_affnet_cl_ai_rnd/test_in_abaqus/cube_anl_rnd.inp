@@ -79,29 +79,25 @@ Surf, S6
 ** in case non-dmg averaging is considered...
 **INCLUDE, file=sec_udmgnl.inp
 **Initial Conditions, type=field
+** ----------------------------------------------------------------
+** -----------------------
+** STEP 1: STATIC, APPLY SHEAR/STRETCH
+** -----------------------
 ** STEP: STATIC
 **
 *Step, name=static, nlgeom=Yes, inc=200
 *Static
 **0.1, 6., 1e-05, 0.03
 0.01, 1., 1e-05, 0.1
-**
-** ----------------------------------------------------------------
-**     BCS
-** ----------------------------------------------------------------
-** ----------------------------------------------------------------
-**     UNIAXIAL BCS
-** ----------------------------------------------------------------
+
+** BOUNDARY CONDITIONS
+** Uniaxial
 **INCLUDE, file=bcs_uni.inp
-** ----------------------------------------------------------------
-**     BIAXIAL BCS
-** ----------------------------------------------------------------
+** Biaxial
 **INCLUDE, file=bcs_bi.inp
-** ----------------------------------------------------------------
-**     SHEAR BCS
-** ----------------------------------------------------------------
+** Shear
 *INCLUDE, file=bcs_sh.inp
-** ----------------------------------------------------------------
+
 ** OUTPUT
 *OUTPUT,FIELD,VARIABLE=PRESELECT,FREQ=1
 *ELEMENT OUTPUT, elset=main_element
@@ -110,7 +106,7 @@ SDV
 *End Step
 ** ----------------------------------------------------------------
 ** -----------------------
-** STEP 2: STATIC, CONSTANT SHEAR/STRETCH
+** STEP 2: STATIC, HOLD: CONSTANT SHEAR/STRETCH
 ** -----------------------
 *Step, name=static_2, nlgeom=Yes, inc=200
 *Static

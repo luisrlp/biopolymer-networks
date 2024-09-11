@@ -1,0 +1,331 @@
+Analysis initiated from SIMULIA established products
+Abaqus JOB cube_anl_rnd
+Abaqus 2022
+Abaqus License Manager checked out the following licenses:
+Abaqus/Standard checked out 5 tokens from Flexnet server localhost.
+<987 out of 1024 licenses remain available>.
+Begin Compiling Abaqus/Standard User Subroutines
+Tue 16 Jul 2024 04:34:17 PM WEST
+Intel(R) Fortran Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 16.0.1.150 Build 20151021
+Copyright (C) 1985-2015 Intel Corporation.  All rights reserved.
+
+ Intel(R) Fortran 16.0-1585
+umat_anl_ai_rnd.f(1200): (col. 14) remark: genmul_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(2978): (col. 14) remark: setcov_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(3034): (col. 14) remark: setgmn_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(5983): (col. 12) remark: hfilfic_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(6070): (col. 12) remark: metiso_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(6399): (col. 12) remark: umat_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(8853): (col. 12) remark: deformation_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(5897): (col. 12) remark: onem_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(2447): (col. 14) remark: phrtsd_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(526): (col. 12) remark: fslip_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(421): (col. 12) remark: invariants_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(6799): (col. 12) remark: stretch_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(211): (col. 12) remark: jacobi_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(380): (col. 12) remark: eigsrt_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(9393): (col. 12) remark: rotation_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(6228): (col. 12) remark: projeul_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(6281): (col. 12) remark: projlag_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(451): (col. 12) remark: pk2isomatfic_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(8921): (col. 12) remark: affclnetfic_discrete_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(7676): (col. 12) remark: sphere01_triangle_project_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(494): (col. 12) remark: deffil_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(634): (col. 12) remark: bangle_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(7374): (col. 12) remark: sigfilfic_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(108): (col. 12) remark: csfilfic_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(7470): (col. 12) remark: icos_shape_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(9366): (col. 12) remark: pk2vol_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(7275): (col. 12) remark: sigvol_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(9416): (col. 12) remark: pk2iso_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(601): (col. 12) remark: setvol_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(9447): (col. 12) remark: setiso_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(145): (col. 12) remark: setjr_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(6986): (col. 12) remark: onem0_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(7303): (col. 12) remark: visco_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(6320): (col. 12) remark: relax_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(8094): (col. 12) remark: polyterm_value_3d_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(8531): (col. 12) remark: r8vec_polarize_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(9265): (col. 12) remark: metvol_ has been targeted for automatic cpu dispatch
+umat_anl_ai_rnd.f(9756): (col. 12) remark: chemicalstat_ has been targeted for automatic cpu dispatch
+End Compiling Abaqus/Standard User Subroutines
+Begin Linking Abaqus/Standard User Subroutines
+Intel(R) Fortran Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 16.0.1.150 Build 20151021
+Copyright (C) 1985-2015 Intel Corporation.  All rights reserved.
+
+GNU ld version 2.30-108.el8_5.1
+End Linking Abaqus/Standard User Subroutines
+Tue 16 Jul 2024 04:34:22 PM WEST
+Begin Analysis Input File Processor
+Tue 16 Jul 2024 04:34:22 PM WEST
+Run pre
+Tue 16 Jul 2024 04:34:23 PM WEST
+End Analysis Input File Processor
+Begin Abaqus/Standard Analysis
+Tue 16 Jul 2024 04:34:23 PM WEST
+Run standard
+  0.821182847023010     
+  0.390688329935074     
+  0.607991099357605     
+  0.607991099357605     
+  0.481204599142075     
+  0.481204599142075     
+  0.575626790523529     
+  0.575626790523529     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.242665097117424     
+  0.674854040145874     
+  0.434470742940903     
+  0.821182847023010     
+  0.390688329935074     
+  0.242665097117424     
+  0.674854040145874     
+  0.434470742940903     
+  0.390688329935074     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.412640810012817     
+  0.527579188346863     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.434470742940903     
+  0.521058380603790     
+  0.479728788137436     
+  0.459937632083893     
+  0.669687211513519     
+  0.218203738331795     
+  0.390688329935074     
+  0.607991099357605     
+  0.481204599142075     
+  0.669687211513519     
+  0.218203738331795     
+  0.390688329935074     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.479728788137436     
+  0.459937632083893     
+  0.390688329935074     
+  0.481204599142075     
+  0.575626790523529     
+  0.412640810012817     
+  0.459937632083893     
+  0.669687211513519     
+  0.218203738331795     
+  0.821182847023010     
+  0.607991099357605     
+  0.481204599142075     
+  0.481204599142075     
+  0.575626790523529     
+  0.575626790523529     
+  0.575626790523529     
+  0.412640810012817     
+  0.412640810012817     
+  0.821182847023010     
+  0.390688329935074     
+  0.607991099357605     
+  0.481204599142075     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.218203738331795     
+  0.481204599142075     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.821182847023010     
+  0.390688329935074     
+  0.607991099357605     
+  0.242665097117424     
+  0.674854040145874     
+  0.434470742940903     
+  0.527579188346863     
+  0.390688329935074     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.527579188346863     
+  0.465634912252426     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.481204599142075     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.434470742940903     
+  0.527579188346863     
+  0.465634912252426     
+  0.479728788137436     
+  0.459937632083893     
+  0.218203738331795     
+  0.821182847023010     
+  0.390688329935074     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.459937632083893     
+  0.459937632083893     
+  0.459937632083893     
+  0.669687211513519     
+  0.669687211513519     
+  0.218203738331795     
+  0.218203738331795     
+  0.821182847023010     
+  0.481204599142075     
+  0.575626790523529     
+  0.412640810012817     
+  0.459937632083893     
+  0.669687211513519     
+  0.218203738331795     
+  0.821182847023010     
+  0.390688329935074     
+  0.242665097117424     
+  0.669687211513519     
+  0.218203738331795     
+  0.821182847023010     
+  0.390688329935074     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.218203738331795     
+  0.821182847023010     
+  0.390688329935074     
+  0.607991099357605     
+  0.481204599142075     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.434470742940903     
+  0.527579188346863     
+  0.607991099357605     
+  0.607991099357605     
+  0.481204599142075     
+  0.481204599142075     
+  0.481204599142075     
+  0.575626790523529     
+  0.575626790523529     
+  0.412640810012817     
+  0.434470742940903     
+  0.527579188346863     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  1.434103818610311E-003
+  0.481204599142075     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.434470742940903     
+  0.527579188346863     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.434470742940903     
+  0.527579188346863     
+  0.465634912252426     
+  1.434103818610311E-003
+  0.459937632083893     
+  0.669687211513519     
+  0.218203738331795     
+  0.821182847023010     
+  0.390688329935074     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.459937632083893     
+  0.459937632083893     
+  0.669687211513519     
+  0.669687211513519     
+  0.218203738331795     
+  0.218203738331795     
+  0.821182847023010     
+  0.821182847023010     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.242665097117424     
+  0.669687211513519     
+  0.218203738331795     
+  0.821182847023010     
+  0.390688329935074     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.218203738331795     
+  0.821182847023010     
+  0.390688329935074     
+  0.607991099357605     
+  0.481204599142075     
+  0.674854040145874     
+  0.434470742940903     
+  0.821182847023010     
+  0.390688329935074     
+  0.607991099357605     
+  0.481204599142075     
+  0.481204599142075     
+  0.575626790523529     
+  0.434470742940903     
+  0.527579188346863     
+  0.390688329935074     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.465634912252426     
+  0.607991099357605     
+  0.481204599142075     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.434470742940903     
+  0.481204599142075     
+  0.575626790523529     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.434470742940903     
+  0.527579188346863     
+  0.575626790523529     
+  0.412640810012817     
+  0.242665097117424     
+  0.674854040145874     
+  0.434470742940903     
+  0.527579188346863     
+  0.465634912252426     
+  1.434103818610311E-003
+Tue 16 Jul 2024 04:34:25 PM WEST
+Abaqus Error: Abaqus/Standard Analysis exited with an error - Please see the 
+message file for possible error messages if the file exists.
+Begin SIM Wrap-up
+Tue 16 Jul 2024 04:34:25 PM WEST
+Run SMASimUtility
+Tue 16 Jul 2024 04:34:25 PM WEST
+End SIM Wrap-up
+Abaqus/Analysis exited with errors

@@ -46,10 +46,13 @@ s11 = session.xyDataObjects['S:S11 (Avg: 75%) PI: PART-1-1 N: 1']
 s22 = session.xyDataObjects['S:S22 (Avg: 75%) PI: PART-1-1 N: 1']
 s12 = session.xyDataObjects['S:S12 (Avg: 75%) PI: PART-1-1 N: 1']
 t = []
-for frame in odb.steps['static'].frames:  # Use 'static' as the step name
-    t.append(frame.frameValue)
+#for frame in odb.steps['static'].frames:  # Use 'static' as the step name
+#   t.append(frame.frameValue)
 
-
+for step_name, step in odb.steps.items():
+    # Loop through all frames in each step
+    for frame in step.frames:
+        t.append(frame.frameValue) 
 
 data_list = [u2, s_principal, s11, s22, s12, t]
 output_array = np.array([pt[1] for pt in u1.data])
