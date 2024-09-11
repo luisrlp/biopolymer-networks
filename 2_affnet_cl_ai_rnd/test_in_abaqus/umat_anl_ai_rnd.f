@@ -12,7 +12,7 @@ module global
 INTEGER NELEM, NSDV, NTERM, FACTOR ! added NTERM and FACTOR
 PARAMETER (NELEM=1)
 !PARAMETER (NSDV=1)
-PARAMETER (NSDV=11)
+PARAMETER (NSDV=4)
 PARAMETER (NTERM=60) ! 60
 PARAMETER (FACTOR=6)
 DOUBLE PRECISION  ONE, TWO, THREE, FOUR, SIX, ZERO
@@ -8975,7 +8975,7 @@ INTEGER (kind=4) :: seed1, seed2
 INTEGER (kind=4) :: test
 CHARACTER(len=100) :: phrase
 REAL(kind=4) , allocatable :: rnd_array(:)
-REAL(kind=4) :: l_bound, h_bound
+REAL(kind=4) :: l_bound, h_bound, diff
 REAL(kind=4) :: mean, sd
 REAL(kind=4) , allocatable ::  etac_array(:)
 DOUBLE PRECISION, intent(out) :: etac_sdv(nsdv-1)
@@ -9058,6 +9058,12 @@ DO test=1, test_num
   IF (test .LE. nsdv-1) THEN
     etac_sdv(test) = etac_array(test)
   END IF
+END DO
+
+!! quick workaround to ensure the sum of CL stiffness is always the same
+diff = SUM(etac_array) - (h_bound+l_bound)/2 * test_num
+DO test=1, test_num
+  etac_array(test) = etac_array(test) - diff / test_num
 END DO
 !----------------------------------------------------------------------
 
@@ -9177,7 +9183,7 @@ bdisp   = affprops(2)
         node_num = node_num + 1
         !rr = rr + ai * v
         !area_total = area_total + ai
-        write(*,*) etac
+        !write(*,*) etac
 
       end do
     end do
@@ -9250,7 +9256,7 @@ bdisp   = affprops(2)
         node_num = node_num + 1  
         !rr = rr + ai * v
         !area_total = area_total + ai
-        write(*,*) etac
+        !write(*,*) etac
 
       end do
     end do
@@ -9263,7 +9269,8 @@ bdisp   = affprops(2)
   deallocate ( face_order )
   deallocate ( face_point )
   deallocate ( point_coord )
-
+  
+  write(*,*)  SUM(etac_array)
 
 RETURN
 END SUBROUTINE affclnetfic_discrete
