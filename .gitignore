@@ -1,0 +1,14 @@
+*.log
+*.dat
+*.csv
+*.pdf
+*.out
+*.npy
+*.so
+*.rpy
+*.odb
+*.par
+*.pes
+*.sta
+*.mod
+*.o
