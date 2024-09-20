@@ -12,6 +12,8 @@
 *.sta
 *.mod
 *.o
+*.pmg
 **/Holzapfel2014_plots/
 **/uniaxial_plots/
 **/figures/
+**sim/

@@ -110,7 +110,7 @@ SDV
 ** -----------------------
 *Step, name=static_2, nlgeom=Yes, inc=200
 *Static
-0.01, 1., 1e-06, 0.1
+0.01, 1., 1e-08, 0.1
 
 ** BOUNDARY CONDITIONS
 ** Uniaxial

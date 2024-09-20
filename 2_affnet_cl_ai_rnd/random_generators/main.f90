@@ -30,7 +30,7 @@ program main
   real ( kind = 4 ) min, max
   real ( kind = 4 ) snorm
   real ( kind = 4 ) x,xx
-  real ( kind = 4 ) mu,sd,mu2,sd2
+  real ( kind = 4 ) mu,sd,mu2,sd2, mu0
   real (kind = 4 ) , allocatable :: y(:), array(:)
   
 !  write ( *, '(a)' ) ' '
@@ -50,7 +50,7 @@ program main
   write ( *, '(a,i12)' ) '  SEED2 = ', seed2
   
   ! test_num = 10000
-  test_num = 500
+  test_num = 720
   allocate (array(test_num))
   allocate (y(test_num))
 
@@ -80,16 +80,17 @@ program main
   write ( *, '(a,i12)' ) '  SEED1 = ', seed1
   write ( *, '(a,i12)' ) '  SEED2 = ', seed2
 
-! Min and max values for distribution functions
-min = 0.0D0
-max = 1.0D0
+!
+mu = 10
+sd = mu*0.05
+
 !!! Choose distribution function
 ! call test_gennor_range ( min, max, mu,sd, phrase ,test_num, array )
-!call test_gennor ( mu,sd, phrase ,test_num, array )
-call test_ignpoi ( mu, sd, phrase, test_num, array )
+! call test_gennor ( mu,sd, phrase ,test_num, array)
+call rnd_gennor(mu, sd, phrase, test_num, array)
+!call test_ignpoi ( mu, sd, phrase, test_num, array )
 ! call test_genunf ( mu, sd, phrase, test_num, array )
 !
-  
 ! data.out - original samples
 ! data2.out - standardized [z-score normalization: (x-mean)/std] samples
   open(6, file='data.out',status='unknown')
@@ -129,7 +130,7 @@ call test_ignpoi ( mu, sd, phrase, test_num, array )
 !    x = snorm ( )
 !    xx =  x*sd2+mu2
 !    write ( 7, '(g14.6)' ) xx
-    !scaled
+    !scaled - Make sure sd is the standard deviation and not the variance!!!
     y(test) = (array(test)-mu)/sd
      write ( 7, '(g14.6)' ) y(test)
   end do
@@ -142,7 +143,6 @@ call test_ignpoi ( mu, sd, phrase, test_num, array )
   close (7)
   stop 0
 end
-
 
 subroutine test_phrtsd ( phrase )
 
@@ -1371,6 +1371,7 @@ subroutine test_gennor (avtr, vartr,phrase , n, array)
   high = 4.0E+00
   sd = genunf ( low, high )
 
+
   write ( *, '(a)' ) ' '
   write ( *, '(a,i6)' ) '  N = ', n
   write ( *, '(a)' ) ' '
@@ -1855,3 +1856,37 @@ end
 !
 !  return
 !end
+
+subroutine rnd_gennor (mu, sd, phrase, n, array)
+
+  ! Based on subroutine test_gennor 
+  ! See test_gennor (or other test subroutines in main.f90) to verify statistics of the generated distribution
+  
+  implicit none
+    
+  integer ( kind = 4 ), intent(in) :: n
+  integer ( kind = 4 ) i
+  integer ( kind = 4 ) seed1
+  integer ( kind = 4 ) seed2
+  real ( kind = 4 ) gennor
+  real ( kind = 4 ), intent(out) :: array(n)
+  real ( kind = 4 ), intent(in)  :: mu, sd
+  character ( len = * ) phrase
+
+    
+  !  Initialize the generators.
+  call initialize ( )   
+  
+  !  Set the seeds based on the phrase.
+  call phrtsd ( phrase, seed1, seed2 )
+  
+  !  Initialize all generators.
+  call set_initial_seed ( seed1, seed2 )
+
+  !  Generate N samples.
+  do i = 1, n
+    array(i) = gennor ( mu, sd )
+  end do
+
+  return
+end

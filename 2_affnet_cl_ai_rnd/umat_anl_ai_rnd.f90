@@ -8994,7 +8994,7 @@ INTEGER (kind=4) :: seed1, seed2
 INTEGER (kind=4) :: test
 CHARACTER(len=100) :: phrase
 REAL(kind=4) , allocatable :: rnd_array(:)
-REAL(kind=4) :: l_bound, h_bound, diff
+REAL(kind=4) :: l_bound, h_bound, target_sum, real_sum
 REAL(kind=4) :: mean, sd
 REAL(kind=4) , allocatable ::  etac_array(:)
 DOUBLE PRECISION, intent(out) :: etac_sdv(nsdv-1)
@@ -9052,7 +9052,33 @@ DOUBLE PRECISION, intent(out) :: etac_sdv(nsdv-1)
   rr = 0.0D+00
   area_total = 0.0D+00
   node_num = 0
+
+!! initialize the model data
+  !     FILAMENT
+  l       = filprops(1)
+  r0f     = filprops(2)
+  r0c     = filprops(3)
+  etac    = filprops(4) !!!!!!! Input, sendo a media +- sd
+  mu0     = filprops(5)
+  beta    = filprops(6)
+  b0      = filprops(7)
+  lambda0 = filprops(8)
+  !     NETWORK
+  n       = affprops(1)
+  bdisp   = affprops(2)
   
+    aux=n*(det**(-one))
+    cfic=zero
+    sfic=zero
+  
+    rho=one
+    r0=r0f+r0c
+  
+    aa = zero
+    avga=zero
+    maxa=zero
+    suma=zero
+    dirmax=zero
 !----------------------------------------------------------------------
 !------------------------ RANDOM GENERATION ---------------------------
 !----------------------------------------------------------------------
@@ -9066,52 +9092,35 @@ test_num = face_num * (FACTOR + 2*sum_f)
 allocate (rnd_array(test_num))
 allocate (etac_array(test_num))
 
-l_bound = 0.5
-h_bound = 0.502
+! Define standard deviation as a fraction of mean value (input etac)
+mean = etac
+sd = 0.00000000001 * mean
+
 CALL timestamp(phrase)
 CALL phrtsd(phrase, seed1, seed2)
-CALL test_gennor(mean, sd, phrase, test_num, rnd_array)
+CALL rnd_gennor(mean, sd, phrase, test_num, etac_array)
 
 DO test=1, test_num 
-  etac_array(test) = l_bound + (rnd_array(test) - minval(rnd_array))/(maxval(rnd_array) - minval(rnd_array)) * (h_bound-l_bound)
+!  etac_array(test) = l_bound + (rnd_array(test) - minval(rnd_array))/(maxval(rnd_array) - minval(rnd_array)) * (h_bound-l_bound)
   IF (test .LE. nsdv-1) THEN
     etac_sdv(test) = etac_array(test)
   END IF
+  !write(*,*) etac_array(test)
 END DO
 
-!! quick workaround to ensure the sum of CL stiffness is always the same
-diff = SUM(etac_array) - (h_bound+l_bound)/2 * test_num
+! Quick workaround to ensure the sum of CL stiffness is always the same
+! Also ensures etac values remain in [0, 1]
+target_sum = mean * test_num
+real_sum = SUM(etac_array)
 DO test=1, test_num
-  etac_array(test) = etac_array(test) - diff / test_num
+  etac_array(test) = etac_array(test) * target_sum / real_sum
+  IF (etac_array(test) < 0) THEN
+    etac_array(test) = 0.0
+  ELSE IF (etac_array(test) > 1) THEN
+    etac_array(test) = 1.0
+  END IF
 END DO
 !----------------------------------------------------------------------
-
-!! initialize the model data
-  !     FILAMENT
-l       = filprops(1)
-r0f     = filprops(2)
-r0c     = filprops(3)
-etac    = filprops(4) !!!!!!! Input, sendo a media +- sd
-mu0     = filprops(5)
-beta    = filprops(6)
-b0      = filprops(7)
-lambda0 = filprops(8)
-!     NETWORK
-n       = affprops(1)
-bdisp   = affprops(2)
-
-  aux=n*(det**(-one))
-  cfic=zero
-  sfic=zero
-
-  rho=one
-  r0=r0f+r0c
-
-  aa = zero
-  avga=zero
-  maxa=zero
-  suma=zero
-  dirmax=zero
   
   !preferred direction measures (macroscale measures)
   prefdir0=prefdir(noel,2:4)
@@ -9202,7 +9211,7 @@ bdisp   = affprops(2)
         node_num = node_num + 1
         !rr = rr + ai * v
         !area_total = area_total + ai
-        !write(*,*) etac
+        write(*,*) etac
 
       end do
     end do
@@ -9275,7 +9284,7 @@ bdisp   = affprops(2)
         node_num = node_num + 1  
         !rr = rr + ai * v
         !area_total = area_total + ai
-        !write(*,*) etac
+        write(*,*) etac
 
       end do
     end do
@@ -9289,7 +9298,7 @@ bdisp   = affprops(2)
   deallocate ( face_point )
   deallocate ( point_coord )
   
-  write(*,*)  SUM(etac_array)
+  !write(*,*)  SUM(etac_array)
 
 RETURN
 END SUBROUTINE affclnetfic_discrete
@@ -9736,111 +9745,40 @@ DO k1=1,ndi
 END DO
 RETURN
 END SUBROUTINE contraction24
-subroutine test_gennor (avtr, vartr,phrase , n, array)
-    !*****************************************************************************80
-    !
-    !! TEST_GENNOR tests GENNOR, which generates normal deviates.
-    !
-    !  Licensing:
-    !
-    !    This code is distributed under the GNU LGPL license.
-    !
-    !  Modified:
-    !
-    !    31 March 2013
-    !
-    !  Author:
-    !
-    !    John Burkardt
-    !
-      implicit none
-    
-      integer ( kind = 4 ) n
-    
-      real ( kind = 4 ) array(n)
-      real ( kind = 4 ) av
-      real ( kind = 4 ) avtr
-      real ( kind = 4 ) gennor
-      real ( kind = 4 ) genunf
-      !real ( kind = 4 ) min
-      !real ( kind = 4 ) max
-      real ( kind = 4 ) high
-      integer ( kind = 4 ) i
-      real ( kind = 4 ) low
-      real ( kind = 4 ) mu
-      real ( kind = 4 ) param(2)
-      character ( len = 4 ) pdf
-      character ( len = * ) phrase
-      real ( kind = 4 ) sd
-      integer ( kind = 4 ) seed1
-      integer ( kind = 4 ) seed2
-      real ( kind = 4 ) var
-      real ( kind = 4 ) vartr
-      real ( kind = 4 ) xmax
-      real ( kind = 4 ) xmin
-    
-      !write ( *, '(a)' ) ' '
-      !write ( *, '(a)' ) 'TEST_GENNOR'
-      !write ( *, '(a)' ) '  GENNOR generates normal deviates.'
-    !
-    !  Initialize the generators.
-    !
-      call initialize_gen ( )   
-      !
-    !  Set the seeds based on the phrase.
-    !
-      call phrtsd ( phrase, seed1, seed2 )
-    !
-    !  Initialize all generators.
-    !
-      call set_initial_seed ( seed1, seed2 )
-    !
-    !  Select the parameters at random within a given range.
-    !
-      low = -10.0E+00
-      high = 10.0E+00
-      mu = genunf ( low, high )
-      !write ( *, '(a,g14.6)' ) '  New MU =   ', mu
-    
-      low = 0.25E+00
-      high = 4.0E+00
-      sd = genunf ( low, high )
-    
-     ! write ( *, '(a)' ) ' '
-    !write ( *, '(a,i6)' ) '  N = ', n
-     ! write ( *, '(a)' ) ' '
-     !write ( *, '(a)' ) '  Parameters:'
-     ! write ( *, '(a)' ) ' '
-     ! write ( *, '(a,g14.6)' ) '  MU =   ', mu
-     ! write ( *, '(a,g14.6)' ) '  SD =   ', sd
-    !
-    !  Generate N samples.
-    !
-      do i = 1, n
-        array(i) = gennor ( mu, sd )
-      end do
-      
-    !
-    !  Compute statistics on the samples.
-    !
-      call stats ( array, n, av, var, xmin, xmax )
-    !
-    !  Request expected value of statistics for this distribution.
-    !
-      pdf = 'nor'
-      param(1) = mu
-      param(2) = sd
-    
-      call trstat ( pdf, param, avtr, vartr )
-    
-      !write ( *, '(a)' ) ' '
-      !write ( *, '(a,2g14.6)' ) '  Sample data range:          ', xmin, xmax
-      !write ( *, '(a,2g14.6)' ) '  Sample mean, variance:      ', av,   var
-      !write ( *, '(a,2g14.6)' ) '  Distribution mean, variance ', avtr, vartr
-    
-      return
-    end
+subroutine rnd_gennor (mu, sd, phrase, n, array)
 
+  ! Based on subroutine test_gennor 
+  ! See test_gennor (or other test subroutines in main.f90) to verify statistics of the generated distribution
+  
+  implicit none
+    
+  integer ( kind = 4 ) n
+  integer ( kind = 4 ) i
+  integer ( kind = 4 ) seed1
+  integer ( kind = 4 ) seed2
+  real ( kind = 4 ) gennor
+  real ( kind = 4 ), intent(out) :: array(n)
+  real ( kind = 4 ), intent(in)  :: mu, sd
+  character ( len = * ) phrase
+
+    
+  !  Initialize the generators.
+  call initialize_gen ( )   
+  
+  !  Set the seeds based on the phrase.
+  call phrtsd ( phrase, seed1, seed2 )
+  
+  !  Initialize all generators.
+  call set_initial_seed ( seed1, seed2 )
+
+  !  Generate N samples.
+  do i = 1, n
+    array(i) = gennor ( mu, sd )
+    !write(*,*) array(i)
+  end do
+
+  return
+end
 SUBROUTINE chemicalstat(frac,frac0,k,dtime)
 
 

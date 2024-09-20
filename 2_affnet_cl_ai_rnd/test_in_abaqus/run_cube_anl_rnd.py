@@ -155,14 +155,14 @@ if __name__ == "__main__":
         'K': 1000.0,
         'C10': 0.0, 'C01': 0.0, 'PHI': 1.0,
         'L': 1.96, 'R0F': 1.63, 'R0C': 0.014,
-        'ETA': 0.6666, 'MU0': 1.0e9, 'BETA': 0.5, 
+        'ETA': 0.5, 'MU0': 1.0e9, 'BETA': 0.5, 
         'B0': 294.0 * 16.0 * 1.38065e-5, 'LAMBDA0': 1.0,
         'NA': 7.66, 'BDISP': 0.001
     }
 
     # Parameters to study
     study_props = {
-        'ETA': [0.3333, 0.6666]  # Add more parameters here if needed
+        'ETA': [0.5]  # Add more parameters here if needed
     }
 
     # Initialize and run the simulation manager

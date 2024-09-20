@@ -19,7 +19,6 @@ INTEGER, INTENT(IN OUT)                  :: kinc
 
 COMMON /kfilp/prefdir
 
-
 DOUBLE PRECISION :: prefdir(nelem,4)     
 CHARACTER (LEN=256) ::  filename, jobdir
 INTEGER :: lenjobdir,i,j,k
