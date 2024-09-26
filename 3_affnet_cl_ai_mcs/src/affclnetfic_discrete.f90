@@ -2,7 +2,7 @@
 !           efi,noel,det,prefdir,ndi) ! (original)
 
 SUBROUTINE affclnetfic_discrete(sfic,cfic,f,filprops,affprops,  &
-  efi,noel,det,prefdir,ndi,etac_sdv)  
+  efi,noel,det,prefdir,ndi,etac_array,etac_sdv)  
 
 
 
@@ -41,7 +41,7 @@ CHARACTER(len=100) :: phrase
 REAL(kind=4) , allocatable :: rnd_array(:)
 REAL(kind=4) :: l_bound, h_bound, target_sum, real_sum
 REAL(kind=4) :: mean, sd
-REAL(kind=4) , allocatable ::  etac_array(:)
+DOUBLE PRECISION ::  etac_array(NDIR)
 DOUBLE PRECISION, intent(out) :: etac_sdv(nsdv-1)
 
 ! INTEGRATION SCHEME
@@ -128,38 +128,12 @@ DOUBLE PRECISION, intent(out) :: etac_sdv(nsdv-1)
 !------------------------ RANDOM GENERATION ---------------------------
 !----------------------------------------------------------------------
 ! A random value of a given property is generated for each direction/node (test_num = n_nodes )
-test_num = face_num * (FACTOR * FACTOR)
 
-allocate (rnd_array(test_num))
-allocate (etac_array(test_num))
-
-! Define standard deviation as a fraction of mean value (input etac)
-mean = etac
-sd = 0.00000000001 * mean
-
-CALL timestamp(phrase)
-CALL phrtsd(phrase, seed1, seed2)
-CALL rnd_gennor(mean, sd, phrase, test_num, etac_array)
-
-DO test=1, test_num 
-!  etac_array(test) = l_bound + (rnd_array(test) - minval(rnd_array))/(maxval(rnd_array) - minval(rnd_array)) * (h_bound-l_bound)
+DO test=1, ndir 
   IF (test .LE. nsdv-1) THEN
     etac_sdv(test) = etac_array(test)
   END IF
   !write(*,*) etac_array(test)
-END DO
-
-! Quick workaround to ensure the sum of CL stiffness is always the same
-! Also ensures etac values remain in [0, 1]
-target_sum = mean * test_num
-real_sum = SUM(etac_array)
-DO test=1, test_num
-  etac_array(test) = etac_array(test) * target_sum / real_sum
-  IF (etac_array(test) < 0) THEN
-    etac_array(test) = 0.0
-  ELSE IF (etac_array(test) > 1) THEN
-    etac_array(test) = 1.0
-  END IF
 END DO
 !----------------------------------------------------------------------
   

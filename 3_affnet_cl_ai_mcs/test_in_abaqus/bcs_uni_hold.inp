@@ -1,0 +1,19 @@
+** ----------------------------------------------------------------
+**                   CONSTANT STRETCH 
+** ----------------------------------------------------------------
+*Amplitude,name=amp2
+0., 0., 1., 0.8, 2., 0., 3., 0.9
+4., 0., 5., 1., 6., 0.
+** Type: Displacement/Rotation
+** Name: BC-1 Type: Symmetry/Antisymmetry/Encastre
+*Boundary
+Set-3, ZSYMM
+** Name: BC-2 Type: Symmetry/Antisymmetry/Encastre
+*Boundary
+Set-4, XSYMM
+** Name: BC-3 Type: Symmetry/Antisymmetry/Encastre
+*Boundary
+Set-1, YSYMM
+**Boundary
+*Boundary, type=displacement
+Set-2, 2,2, 0.1
