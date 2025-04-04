@@ -131,7 +131,8 @@ DOUBLE PRECISION, intent(out) :: etac_sdv(nsdv-1)
 
 DO test=1, ndir 
   IF (test .LE. nsdv-1) THEN
-    etac_sdv(test) = etac_array(test)
+    !etac_sdv(test) = etac_array(test)
+    etac_sdv(test) = etac
   END IF
   !write(*,*) etac_array(test)
 END DO
@@ -187,11 +188,11 @@ END DO
         CALL bangle(ang,f,mfi,noel,pd,ndi)
   
         CALL density(rho,ang,bdisp,efi)
-        rho = one
+        !rho = one
 
         !!! Always duplicate the changes to the opposite direction subtriangles
         !!!! Assigning random value to etac
-        etac = etac_array(node_num + 1)  
+        !etac = etac_array(node_num + 1)  
         IF((etac > zero).AND.(etac .LE. one))THEN
             lambdaif=etac*(r0/r0f)*(lambdai-one)+one
             lambdaic=(lambdai*r0-lambdaif*r0f)/r0c
@@ -226,7 +227,7 @@ END DO
         node_num = node_num + 1
         !rr = rr + ai * v
         !area_total = area_total + ai
-        write(*,*) etac
+        !write(*,*) etac
 
       end do
     end do
@@ -260,10 +261,10 @@ END DO
         CALL bangle(ang,f,mfi,noel,pd,ndi)
   
         CALL density(rho,ang,bdisp,efi)
-        rho=one
+        !rho=one
 
         !!!! Assigning random value to etac
-        etac = etac_array(node_num + 1)  
+        !etac = etac_array(node_num + 1)  
         IF((etac > zero).AND.(etac .LE. one))THEN
             lambdaif=etac*(r0/r0f)*(lambdai-one)+one
             lambdaic=(lambdai*r0-lambdaif*r0f)/r0c
@@ -299,7 +300,7 @@ END DO
         node_num = node_num + 1  
         !rr = rr + ai * v
         !area_total = area_total + ai
-        write(*,*) etac
+        !write(*,*) etac
 
       end do
     end do

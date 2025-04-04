@@ -1,4 +1,4 @@
-SUBROUTINE run_umat_py(NPROPS, NDI, PROPS, DFGRD1, STRESS, TIME, DTIME, KSTEP)
+SUBROUTINE run_umat_py(NPROPS, NDI, PROPS, DFGRD1, STRESS, TIME, DTIME, KSTEP, SSE)
 
 use,intrinsic :: ISO_Fortran_env
 use global
@@ -17,7 +17,7 @@ PARAMETER(NOEL = 1, NPT = 8)
 
 INTEGER, INTENT(IN) :: NPROPS, NDI, KSTEP
 DOUBLE PRECISION, INTENT(IN) :: PROPS(NPROPS), DFGRD1(NDI,NDI), TIME(2), DTIME
-DOUBLE PRECISION, INTENT(OUT) :: STRESS(NTENS)
+DOUBLE PRECISION, INTENT(OUT) :: STRESS(NTENS), SSE
 !
 integer ii
 CHARACTER*8 CMNAME, stri
@@ -55,11 +55,11 @@ CALL UMAT(STRESS,STATEV,DDSDDE,SSE,SPD,SCD,RPL,DDSDDT, DRPLDE,DRPLDT,STRAN,     
 DSTRAN,TIME,DTIME,TEMP,DTEMP,PREDEF,DPRED,CMNAME,NDI,NSHR,NTENS,NSTATEV,PROPS,  &
 NPROPS,COORDS,DROT,PNEWDT,CELENT,DFGRD0,DFGRD1,NOEL,NPT,LAYER,KSPT,KSTEP,KINC)
 
- write(*,*) STRETCH
- write(*,*)
- write(*,*) STRESS
- write(*,*)
- write(*,*) DDSDDE
+! write(*,*) STRETCH
+! write(*,*)
+! write(*,*) STRESS
+! write(*,*)
+! write(*,*) DDSDDE
 close(150)
 !################################################################################################!
 

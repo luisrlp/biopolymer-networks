@@ -13,7 +13,7 @@ INCLUDE 'aba_param.inc'
 INTEGER, INTENT(IN OUT)                  :: lop
 INTEGER, INTENT(IN OUT)                  :: lrestart
 REAL, INTENT(IN OUT)                     :: time(2)
-real(8), INTENT(IN OUT)                   :: dtime
+real(8), INTENT(IN OUT)                  :: dtime
 INTEGER, INTENT(IN OUT)                  :: kstep
 INTEGER, INTENT(IN OUT)                  :: kinc
 
@@ -39,12 +39,12 @@ IF(lop == 0.OR.lop == 4) THEN
   CLOSE(16)
 
   !random CL stiffness eta
-  etafile = jobdir(:lenjobdir)//'/'//dir3
-  OPEN(17,FILE=etafile)
-  DO i=1,nelem*ngp
-    READ(17,*) (etadir(i,j),j=1,ndir+2)
-  END DO
-  CLOSE(17)
+  !etafile = jobdir(:lenjobdir)//'/'//dir3
+  !OPEN(17,FILE=etafile)
+  !DO i=1,nelem*ngp
+  !  READ(17,*) (etadir(i,j),j=1,ndir+2)
+  !END DO
+  !CLOSE(17)
 
 
 END IF

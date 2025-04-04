@@ -11,7 +11,7 @@
 !>--------------------------------------------------------------------
 !>---------------------------------------------------------------------
 
-SUBROUTINE umat(stress,statev,ddsdde,sse,spd,scd, rpl,ddsddt,drplde,drpldt,  &
+SUBROUTINE umat_rnd(stress,statev,ddsdde,sse,spd,scd, rpl,ddsddt,drplde,drpldt,  &
     stran,dstran,time,dtime,temp,dtemp,predef,dpred,cmname,  &
     ndi,nshr,ntens,nstatev,props,nprops,coords,drot,pnewdt,  &
     celent,dfgrd0,dfgrd1,noel,npt,layer,kspt,kstep,kinc)
@@ -91,8 +91,8 @@ DOUBLE PRECISION :: c10,c01,sseiso,diso(5),pkmatfic(ndi,ndi),  &
     cisomatfic(ndi,ndi,ndi,ndi)
 !     FILAMENTS NETWORK CONTRIBUTION
 DOUBLE PRECISION :: filprops(8), affprops(2)
-DOUBLE PRECISION :: cactin,cabp,R,ll,lambda0,mu0,beta,nn,b0,bb
-DOUBLE PRECISION :: phi,r0,r0c,r0f,a,p,etac,na,mactin,rhoactin
+DOUBLE PRECISION :: ll,lambda0,mu0,beta,nn,b0,bb
+DOUBLE PRECISION :: phi,r0,r0c,r0f,p,etac
 DOUBLE PRECISION :: pknetfic(ndi,ndi),cmnetfic(ndi,ndi,ndi,ndi)
 DOUBLE PRECISION :: snetfic(ndi,ndi),cnetfic(ndi,ndi,ndi,ndi)
 DOUBLE PRECISION :: pknetficaf(ndi,ndi),pknetficnaf(ndi,ndi)
@@ -119,7 +119,7 @@ DOUBLE PRECISION :: etac_sdv(nsdv-1)
 !REAL(kind=4) :: l_bound, h_bound
 REAL(kind=4) :: mean, sd
 
-!write(*,*) noel, npt
+write(*,*) noel, npt
 
 !----------------------------------------------------------------------
 !-------------------------- INITIALIZATIONS ---------------------------
@@ -203,43 +203,21 @@ k        = props(1)
 c10      = props(2)
 c01      = props(3)
 phi      = props(4)
-!     ACTIN/CROSSLINKERS
-! ll       = props(5)
-cactin   = props(5)    ! Concentration of actin 
-! r0f      = props(6)
-R        = props(6)    ! Relative crosslinker concentration
+!     FILAMENT
+ll       = props(5)
+r0f      = props(6)
 r0c      = props(7)
 etac     = props(8)
 mu0      = props(9)
 beta     = props(10)
 b0       = props(11)
 lambda0  = props(12)
-a        = props(13)   ! Ratio between contour length and end-to-end distance
-! filprops = props(5:12)
+filprops = props(5:12)
 !     NONAFFINE NETWORK
-! nn       = props(13)
+nn       = props(13)
 bb        = props(14)
-! affprops= props(13:14)
+affprops= props(13:14)
 
-! Pass this to subroutine
-!     CL CONCENTRATION
-cabp = cactin*R
-! write(*,*) 'cabp = ', cabp
-!     FILAMENT END-TO-END DISTANCE
-r0f = 1.6 * cabp**(-2.0/5.0)
-! write(*,*) 'r0f = ', r0f
-!     FILAMENT CONTOUR LENGTH
-ll = a * r0f
-! write(*,*) 'll = ', ll
-!     FILAMENT DENSITY
-na = 6.022e23
-mactin = 42.0          ! [kDa]
-rhoactin = 16.0        ! [MDa/microm]
-nn = cactin/ll * na * mactin / rhoactin * 1.0e-24
-! write(*,*) 'nn = ', nn
-
-filprops = (/ll, r0f, r0c, etac, mu0, beta, b0, lambda0/)
-affprops = (/nn, bb/)
 
 !        STATE VARIABLES AND CHEMICAL PARAMETERS
 IF ((time(1) == zero).AND.(kstep == 1)) THEN
@@ -297,8 +275,7 @@ END IF
 CALL erfi(efi,bb)
 !     'FICTICIOUS' PK2 STRESS AND MATERIAL ELASTICITY TENSORS
 !------------ AFFINE NETWORK --------------
-IF (phi > zero) THEN
-  ! write(*,*) 'AFFINE'
+IF (nn > zero) THEN
   ! GET CL STIFFNESS DISTRIBUTION FOR CURRENT GP
   !CALL getprops_gp(noel, npt, etadir, etadir_array)
   
@@ -324,6 +301,7 @@ cfic=(one-phi)*cisomatfic+cnetfic
 !----------------------------------------------------------------------
 !-------------------------- STRESS MEASURES ---------------------------
 !----------------------------------------------------------------------
+
 !---- VOLUMETRIC ------------------------------------------------------
 !      PK2 STRESS
 ! CALL pk2vol(pkvol,pv,c,ndi)
@@ -400,9 +378,8 @@ CALL indexx(stress,ddsdde,sigma,ddsigdde,ntens,ndi)
 CALL sdvwrite(det,etac_sdv,statev)
 !     END DO
 !----------------------------------------------------------------------
-! write(*,*) 'UMAT finished running'
 RETURN
-END SUBROUTINE umat
+END SUBROUTINE umat_rnd
 !----------------------------------------------------------------------
 !--------------------------- END OF UMAT ------------------------------
 !----------------------------------------------------------------------
