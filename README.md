@@ -246,7 +246,7 @@ Sets the main control parameters to run the material-related routines (NELEM, NS
 #### _fil_
 - Call _pullforce_ to obtain the filament force
     - Gets the roots of $G(f)=0$. 
-    - $G(f) = LHS-RHS = 0$ comes from the relation for extensible filaments: $\frac{\lambda \lambda_0 r_0}{L} = 1+\frac{f}{\mu_0} + \frac{(1+2f/\mu_0)(1+f/\mu_0)^\beta (1-r_0 / L)}{[1+fL^2/(\pi^2B_0)+f^2L^2/(\pi^2B_0\mu_0)]^\beta}$
+    - $G(f) = LHS-RHS = 0$ comes from the relation for extensible filaments: $\frac{\lambda \lambda_0 r_0}{L} = 1+\frac{f}{\mu_0} - \frac{(1+2f/\mu_0)(1+f/\mu_0)^\beta (1-r_0 / L)}{[1+fL^2/(\pi^2B_0)+f^2L^2/(\pi^2B_0\mu_0)]^\beta}$
 - Filament Strain-Energy 1st and 2nd order derivatives
 - $w' = \lambda_0 r_0 f$
 - $w^{\prime \prime}=\frac{\lambda_{0}^{2} r_{0}^{2} \mu_{0} / L}{1+Y\left(\frac{1+\alpha f^\*}{1+f^\*+\alpha f^{*^{2}}}\right)^{\beta}\left(1-r_{0} / L\right)}$, with $Y=\frac{\beta}{\alpha} \frac{\left(1+2 \alpha f^{\star}\right)^{2}}{1+f^{\star}+\alpha f^{2}}-\beta \frac{1+2 \alpha f^{\star}}{1+\alpha f^{\star}}-2$
